@@ -30,7 +30,6 @@ public class FirstService {
      * @return calculated value
      */
     public long calculating(){
-	CalculationUtil calculationUtil = new CalculationUtil();
-	return calculationUtil.calculateValue(value);
+	return CalculationUtil.calculateValue(value);
     }
 }
