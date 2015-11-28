@@ -1,14 +1,33 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>jmp.yury.kiryla</groupId>
-  <artifactId>psd_task1</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>Principle of software developmen Task1</name>
-  <description>Create modular project with using DRY principle. You could use any of build managers (ant, maven, gradle and etc.)</description>
-  <modules>
-  	<module>Utils</module>
-  	<module>Services</module>
-  	<module>Testing</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>jmp.yury.kiryla</groupId>
+	<artifactId>psd_task1</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Principle of software developmen Task1</name>
+	<description>Create modular project with using DRY principle. You could use any of build managers (ant, maven, gradle and etc.)</description>
+	<modules>
+		<module>Utils</module>
+		<module>Services</module>
+		<module>Testing</module>
+	</modules>
+
+	<properties>
+		<java.version>1.6</java.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
