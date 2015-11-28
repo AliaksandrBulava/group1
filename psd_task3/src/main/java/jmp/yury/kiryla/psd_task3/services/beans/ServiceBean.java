@@ -68,14 +68,11 @@ public class ServiceBean implements UserService, EventService {
      */
     @Override
     public void assignEvent(User user, Event event) {
-	Set<Event> events = assignedEvents.get(user);
 	
-	if (event == null){
-	    events = new HashSet<Event>();
-	    assignedEvents.put(user, events);
+	if (!assignedEvents.containsKey(user)){
+	    assignedEvents.put(user, new HashSet<Event>());
 	}
-	
-	events.add(event);
+	assignedEvents.get(user).add(event);
 	
 	System.out.println(user.getGender() + " " + user.getFirstName() + " " + user.getSecondName() + " registered for " + event.getName());
     }
