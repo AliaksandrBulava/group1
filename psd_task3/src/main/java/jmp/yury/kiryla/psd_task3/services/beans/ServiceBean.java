@@ -49,7 +49,7 @@ public class ServiceBean implements UserService, EventService {
      * @see jmp.yury.kiryla.psd_task3.services.UserService#register(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Date)
      */
     @Override
-    public void register(String firstName, String secondName, String middleName, String title, String gender,
+    public User register(String firstName, String secondName, String middleName, String title, String gender,
 	    String email, Date birthday) {
 	User user = new User();
 	user.setFirstName(firstName);
@@ -60,6 +60,7 @@ public class ServiceBean implements UserService, EventService {
 	user.setEmail(email);
 	user.setBirthday(birthday);
 	User.create(user);
+	return user;
     }
 
     /**
@@ -75,6 +76,8 @@ public class ServiceBean implements UserService, EventService {
 	}
 	
 	events.add(event);
+	
+	System.out.println(user.getGender() + " " + user.getFirstName() + " " + user.getSecondName() + " registered for " + event.getName());
     }
 
 }

@@ -24,8 +24,9 @@ public interface UserService {
      * @param gender gender
      * @param email email
      * @param birthday birthday
+     * @return the User
      */
-    public void register(String firstName, String secondName, String middleName, String title, String gender, 
+    public User register(String firstName, String secondName, String middleName, String title, String gender, 
 	    String email, Date birthday);
     
     /**
