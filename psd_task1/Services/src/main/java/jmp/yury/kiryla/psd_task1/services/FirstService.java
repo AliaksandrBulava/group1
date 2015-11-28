@@ -26,10 +26,10 @@ public class FirstService {
     }
     
     /**
-     * Process method
+     * Calculating method
      * @return calculated value
      */
-    public long process(){
+    public long calculating(){
 	CalculationUtil calculationUtil = new CalculationUtil();
 	return calculationUtil.calculateValue(value);
     }
