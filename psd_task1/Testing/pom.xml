@@ -7,5 +7,13 @@
   </parent>
   <artifactId>Testing</artifactId>
   <name>Testing</name>
-  <description>for build jar and test full projest</description>
+  <description>for build jar and test full project</description>
+  <dependencies>
+		<dependency>
+			<groupId>jmp.yury.kiryla</groupId>
+			<artifactId>Services</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 </project>
