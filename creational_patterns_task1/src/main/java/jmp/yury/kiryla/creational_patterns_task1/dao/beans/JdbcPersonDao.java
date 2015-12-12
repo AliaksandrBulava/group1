@@ -36,7 +36,10 @@ public class JdbcPersonDao implements PersonDao {
 
     /**
      * Database connection
+     * 
+     * 
      */
+    //Do not need to close for used db type
     private static Connection connection = null;
 
     /**
