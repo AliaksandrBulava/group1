@@ -68,16 +68,19 @@ public class JdbcPersonDao implements PersonDao {
 
     /**
      * Database connection
-     * 
-     * 
      */
     // Do not need to close for used db type
-    private static Connection connection = null;
+    private Connection connection = null;
+    
+    /**
+     * {@link JdbcPersonDao} instance
+     */
+    private static JdbcPersonDao instance = null;
 
     /**
      * Constructor
      */
-    public JdbcPersonDao() {
+    private JdbcPersonDao() {
 	super();
 	if (connection == null) {
 	    try {
@@ -95,6 +98,17 @@ public class JdbcPersonDao implements PersonDao {
 	    }
 
 	}
+    }
+    
+    /**
+     * Get DAO instance
+     * @return the {@link JdbcPersonDao} object
+     */
+    public static synchronized JdbcPersonDao getInstance(){
+	if (instance == null){
+	    instance = new JdbcPersonDao();
+	}
+	return instance;
     }
 
     /**

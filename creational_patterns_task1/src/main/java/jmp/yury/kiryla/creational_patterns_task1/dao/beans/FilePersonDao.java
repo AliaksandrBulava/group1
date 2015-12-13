@@ -32,7 +32,30 @@ public class FilePersonDao implements PersonDao {
     /**
      * for set id
      */
-    private static long idCounter = 1;
+    private long idCounter = 1;
+    
+    /**
+     * {@link FilePersonDao} instance
+     */
+    private static FilePersonDao instance = null;
+
+    /**
+     * {@link FilePersonDao}'s constructor
+     */
+    private FilePersonDao() {
+	super();
+    }
+    
+    /**
+     * Get DAO instance
+     * @return {@link FilePersonDao} object
+     */
+    public static synchronized FilePersonDao getInstance(){
+	if (instance == null){
+	    instance = new FilePersonDao();
+	}
+	return instance;
+    }
 
     /**
      * @see jmp.yury.kiryla.creational_patterns_task1.dao.PersonDao#writePerson(jmp.yury.kiryla.creational_patterns_task1.beans.Person)
