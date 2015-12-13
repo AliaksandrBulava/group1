@@ -79,22 +79,21 @@ public class JdbcPersonDao implements PersonDao {
      */
     public JdbcPersonDao() {
 	super();
-	synchronized (JdbcPersonDao.class) {
-	    if (connection == null) {
-		try {
-		    Class.forName(DRIVER_NAME);
-		    connection = DriverManager.getConnection(DB_URL);
+	if (connection == null) {
+	    try {
+		Class.forName(DRIVER_NAME);
+		connection = DriverManager.getConnection(DB_URL);
 
-		    // Initialize Person table
-		    PreparedStatement ps = connection.prepareStatement(CREATE_PERSON_TABLE);
-		    ps.execute();
-		    ps.close();
-		} catch (ClassNotFoundException e) {
-		    e.printStackTrace();
-		} catch (SQLException e) {
-		    e.printStackTrace();
-		}
+		// Initialize Person table
+		PreparedStatement ps = connection.prepareStatement(CREATE_PERSON_TABLE);
+		ps.execute();
+		ps.close();
+	    } catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	    } catch (SQLException e) {
+		e.printStackTrace();
 	    }
+
 	}
     }
 
