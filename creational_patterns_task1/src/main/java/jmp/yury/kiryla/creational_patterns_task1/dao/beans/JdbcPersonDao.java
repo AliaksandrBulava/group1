@@ -34,7 +34,7 @@ public class JdbcPersonDao implements PersonDao {
     /**
      * Create PERSON table statement
      */
-    private static final String CREATE_PERSON_TABLE = "create table PERSON(ID INT AUTO_INCREMENT, NAME VARCHAR(50) NOT NULL,PRIMARY KEY (ID), UNIQUE (NAME)";
+    private static final String CREATE_PERSON_TABLE = "create table PERSON(ID INT AUTO_INCREMENT, NAME VARCHAR(50) NOT NULL,PRIMARY KEY (ID), UNIQUE (NAME))";
 
     /**
      * Insert PERSON statement
@@ -177,7 +177,7 @@ public class JdbcPersonDao implements PersonDao {
 	    e.printStackTrace();
 	}
 
-	return null;
+	return people.isEmpty() ? null : people;
     }
 
     /**
@@ -192,7 +192,7 @@ public class JdbcPersonDao implements PersonDao {
     private Person getPerson(ResultSet rs) throws SQLException {
 	Person person = new Person();
 	person.setId(rs.getLong(ID_KEY));
-	person.setName(NAME_KEY);
+	person.setName(rs.getString(NAME_KEY));
 	return person;
     }
 }

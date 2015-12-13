@@ -44,6 +44,7 @@ public class FilePersonDao implements PersonDao {
      */
     private FilePersonDao() {
 	super();
+	new File(FILENAME).delete();
     }
     
     /**
@@ -114,7 +115,7 @@ public class FilePersonDao implements PersonDao {
 	    people = (List<Person>) ois.readObject();
 	    ois.close();
 	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
+	    return null;
 	} catch (IOException e) {
 	    e.printStackTrace();
 	} catch (ClassNotFoundException e) {
