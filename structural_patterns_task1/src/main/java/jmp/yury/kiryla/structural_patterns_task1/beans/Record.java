@@ -92,7 +92,7 @@ public class Record {
      * @see java.lang.Object#clone()
      */
     @Override
-    public Record clone() throws CloneNotSupportedException {
+    public Record clone() {
 	Record record = new Record();
 	record.id = id;
 	record.value = value;
