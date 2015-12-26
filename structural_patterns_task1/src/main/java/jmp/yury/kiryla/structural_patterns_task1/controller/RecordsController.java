@@ -3,8 +3,6 @@
  */
 package jmp.yury.kiryla.structural_patterns_task1.controller;
 
-import java.util.Arrays;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jmp.yury.kiryla.structural_patterns_task1.beans.Record;
