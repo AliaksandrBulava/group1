@@ -3,24 +3,23 @@
  */
 package jmp.yury.kiryla.structural_patterns_task1.dao.beans;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import jmp.yury.kiryla.structural_patterns_task1.beans.Record;
 import jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao;
 
 /**
- * {@link Set} implementation {@link RecordsDao}
+ * {@link Map} implementation {@link RecordsDao}
  * 
  * @author Yury
  *
  */
-public class SetRecordsDao implements RecordsDao {
+public class MapRecordsDao implements RecordsDao {
     /**
-     * records set
+     * records map
      */
-    private Set<Record> records = new HashSet<>();
+    private Map<Long, Record> records = new HashMap<>();
     
     /**
      * ID counter
@@ -36,7 +35,7 @@ public class SetRecordsDao implements RecordsDao {
 	    throw new IllegalArgumentException("Record already created");
 	}
 	record.setId(idCounter++);
-	records.add(record.clone());
+	records.put(record.getId(), record.clone());
     }
 
     /**
@@ -44,8 +43,10 @@ public class SetRecordsDao implements RecordsDao {
      */
     @Override
     public Record read(long id) {
-	Optional<Record> optional = records.stream().filter(n -> n.getId() == id).findFirst();
-	return optional.isPresent() ? optional.get().clone() : null;
+	if (records.containsKey(id)){
+	    return records.get(id).clone();
+	}
+	return null;
     }
 
     /**
@@ -53,7 +54,7 @@ public class SetRecordsDao implements RecordsDao {
      */
     @Override
     public Record[] read() {
-	return records.stream().map(t -> t.clone()).toArray(Record[]::new);
+	return records.entrySet().stream().map(t -> t.getValue().clone()).toArray(Record[]::new);
     }
 
     /**
@@ -61,8 +62,8 @@ public class SetRecordsDao implements RecordsDao {
      */
     @Override
     public void update(Record record) {
-	if(records.contains(record)){
-	    records.add(record);
+	if(records.containsKey(record.getId())){
+	    records.put(record.getId(), record);
 	} else {
 	    throw new IllegalArgumentException("Record is not existed");
 	}	
@@ -73,7 +74,7 @@ public class SetRecordsDao implements RecordsDao {
      */
     @Override
     public void delete(Record record) {
-	if(!records.remove(record)){
+	if(records.remove(record.getId()) == null){
 	    throw new IllegalArgumentException("Record is not existed");
 	}
     }
