@@ -12,7 +12,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jmp.yury.kiryla.structural_patterns_task1.beans.Record;
 import jmp.yury.kiryla.structural_patterns_task1.controller.RecordsController;
