@@ -4,6 +4,8 @@
 package jmp.yury.kiryla.structural_patterns_task1;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -238,7 +240,36 @@ public class App extends Application {
     private Button createButtonNew(){
 	Button button = new Button(NEW_BUTTON_TITLE);
 	button.setOnAction(event -> {
+	    Stage stage = new Stage();
+	    stage.setTitle("Add new Record");
+
+	    FlowPane flowPane = new FlowPane(10, 10);
+	    flowPane.setAlignment(Pos.CENTER);
+
+	    Scene scene = new Scene(flowPane, 350, 150);
+	    stage.setScene(scene);
 	    
+	    TextField textField = new TextField();
+	    textField.setPromptText("Enter new record");
+	    textField.setPrefColumnCount(28);
+	    
+	    EventHandler<ActionEvent> saveRecord = (ae) -> {
+		recordsController.createRecord(textField.getText());
+		listView.setItems(recordsController.getRecords());
+		stage.hide();
+	    };
+	    
+	    textField.setOnAction(saveRecord);
+
+	    Button saveButton = new Button(SAVE_BUTTON_TITLE);
+	    saveButton.setOnAction(saveRecord);
+
+	    Button cancelButton = new Button(CANCEL_BUTTON_TITLE);
+	    cancelButton.setOnAction(ae -> stage.hide());
+
+	    flowPane.getChildren().addAll(textField, saveButton, cancelButton);
+
+	    stage.show();
 	});
 	return button;
     }
