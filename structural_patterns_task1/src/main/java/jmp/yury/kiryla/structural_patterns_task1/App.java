@@ -107,104 +107,7 @@ public class App extends Application {
 	primaryStage.setScene(scene);
 	
 	//Populate Pane
-//	populatePane(gridPane);
-
-	// list view
-	ListView<Record> listView = new ListView<>(recordsController.getRecords());
-	listView.setMinWidth(450);
-	gridPane.add(listView, 1, 1);
-
-	// Buttons
-	Button newButton = new Button("New");
-	Button updateButton = new Button("Update");
-	Button deleteButton = new Button("Delete");
-	HBox buttonsBox = new HBox(10);
-	buttonsBox.getChildren().addAll(newButton, updateButton, deleteButton);
-	gridPane.add(buttonsBox, 1, 2);
-
-	// add new Record
-	newButton.setOnAction(ae -> {
-	    Stage newRecordStage = new Stage();
-	    newRecordStage.setTitle("Add new Record");
-
-	    FlowPane newRecordFlowPane = new FlowPane(10, 10);
-	    newRecordFlowPane.setAlignment(Pos.CENTER);
-
-	    Scene newRecordScene = new Scene(newRecordFlowPane, 350, 150);
-	    newRecordStage.setScene(newRecordScene);
-
-	    TextField newRecordTextField = new TextField();
-	    newRecordTextField.setPromptText("Enter new record");
-	    newRecordTextField.setPrefColumnCount(28);
-	    newRecordTextField.setOnAction(event -> {
-		recordsController.createRecord(newRecordTextField.getText());
-		listView.setItems(recordsController.getRecords());
-		newRecordStage.hide();
-	    });
-
-	    Button newRecordSaveButton = new Button("Save");
-	    newRecordSaveButton.setOnAction(event -> {
-		recordsController.createRecord(newRecordTextField.getText());
-		listView.setItems(recordsController.getRecords());
-		newRecordStage.hide();
-	    });
-
-	    Button newRecordCancelButton = new Button("Cancel");
-	    newRecordCancelButton.setOnAction(event -> newRecordStage.hide());
-
-	    newRecordFlowPane.getChildren().addAll(newRecordTextField, newRecordSaveButton, newRecordCancelButton);
-
-	    newRecordStage.show();
-	});
-
-	updateButton.setOnAction(ae -> {
-	    Stage updateRecordStage = new Stage();
-	    updateRecordStage.setTitle("Update Record");
-
-	    FlowPane updateRecordFlowPane = new FlowPane(10, 10);
-	    updateRecordFlowPane.setAlignment(Pos.CENTER);
-
-	    Scene updateRecordScene = new Scene(updateRecordFlowPane, 350, 150);
-	    updateRecordStage.setScene(updateRecordScene);
-
-	    Record record = listView.selectionModelProperty().get().getSelectedItem();
-
-	    TextField updateRecordTextField = new TextField();
-	    updateRecordTextField.setText(record.getValue());
-	    updateRecordTextField.setPrefColumnCount(28);
-	    updateRecordTextField.setOnAction(event -> {
-		record.setValue(updateRecordTextField.getText());
-		recordsController.updateRecord(record);
-		listView.setItems(recordsController.getRecords());
-		listView.refresh();
-		updateRecordStage.hide();
-	    });
-
-	    Button updateRecordSaveButton = new Button("Save");
-	    updateRecordSaveButton.setOnAction(event -> {
-		record.setValue(updateRecordTextField.getText());
-		recordsController.updateRecord(record);
-		listView.setItems(recordsController.getRecords());
-		listView.refresh();
-		updateRecordStage.hide();
-	    });
-
-	    Button updateRecordCancelButton = new Button("Cancel");
-	    updateRecordCancelButton.setOnAction(event -> updateRecordStage.hide());
-
-	    updateRecordFlowPane.getChildren().addAll(updateRecordTextField, updateRecordSaveButton,
-		    updateRecordCancelButton);
-
-	    updateRecordStage.show();
-	});
-
-	deleteButton.setOnAction(ae -> {
-	    Record record = listView.selectionModelProperty().get().getSelectedItem();
-	    if (record != null) {
-		recordsController.deleteRecord(record);
-		listView.setItems(recordsController.getRecords());
-	    }
-	});
+	populatePane(gridPane);
 
 	primaryStage.show();
     }
@@ -231,6 +134,12 @@ public class App extends Application {
 	gridPane.add(listView, 1, 1);
 	
 	Button newButton = createButtonNew();
+	Button updateButton = createButtonUpdate();
+	Button deleteButton = createButtonDelete();
+	
+	HBox buttonsBox = new HBox(10);
+	buttonsBox.getChildren().addAll(newButton, updateButton, deleteButton);
+	gridPane.add(buttonsBox, 1, 2);
     }
     
     /**
@@ -274,4 +183,66 @@ public class App extends Application {
 	return button;
     }
     
+    /**
+     * Create Button 'Update'
+     * @return the {@link Button}
+     */
+    private Button createButtonUpdate() {
+	Button button = new Button(UPDATE_BUTTON_TITLE);
+	button.setOnAction(ae -> {
+	    Stage stage = new Stage();
+	    stage.setTitle("Update Record");
+
+	    FlowPane flowPane = new FlowPane(10, 10);
+	    flowPane.setAlignment(Pos.CENTER);
+
+	    Scene scene = new Scene(flowPane, 350, 150);
+	    stage.setScene(scene);
+
+	    Record record = listView.selectionModelProperty().get().getSelectedItem();
+	    TextField textField = new TextField();
+	    textField.setText(record.getValue());
+	    textField.setPrefColumnCount(28);
+	    
+	    EventHandler<ActionEvent> updateRecord = event -> {
+		record.setValue(textField.getText());
+		recordsController.updateRecord(record);
+		listView.setItems(recordsController.getRecords());
+		listView.refresh();
+		stage.hide();
+	    };
+
+	    
+	    textField.setOnAction(updateRecord);
+
+	    Button updateButton = new Button(UPDATE_BUTTON_TITLE);
+	    updateButton.setOnAction(updateRecord);
+
+	    Button cancelButton = new Button(CANCEL_BUTTON_TITLE);
+	    cancelButton.setOnAction(event -> stage.hide());
+
+	    flowPane.getChildren().addAll(textField, updateButton,
+		    cancelButton);
+
+	    stage.show();
+	});
+	
+	return button;
+    }
+    
+    /**
+     * Create Button 'Delete'
+     * @return the {@link Button}
+     */
+    private Button createButtonDelete() {
+	Button button = new Button(DELETE_BUTTON_TITLE);
+	button.setOnAction(ae -> {
+	    Record record = listView.selectionModelProperty().get().getSelectedItem();
+	    if (record != null) {
+		recordsController.deleteRecord(record);
+		listView.setItems(recordsController.getRecords());
+	    }
+	});
+	return button;
+    }
 }
