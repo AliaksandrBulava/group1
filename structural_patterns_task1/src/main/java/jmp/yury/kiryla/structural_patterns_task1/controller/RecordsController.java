@@ -5,7 +5,7 @@ package jmp.yury.kiryla.structural_patterns_task1.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import jmp.yury.kiryla.structural_patterns_task1.beans.Record;
+import jmp.yury.kiryla.structural_patterns_task1.beans.String;
 import jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao;
 import jmp.yury.kiryla.structural_patterns_task1.dao.beans.MapRecordsDao;
 
@@ -26,7 +26,7 @@ public class RecordsController {
      * 
      * @return the {@link ObservableList} object
      */
-    public ObservableList<Record> getRecords() {
+    public ObservableList<String> getRecords() {
 	return FXCollections.observableArrayList(recordsDao.read());
     }
 
@@ -38,7 +38,7 @@ public class RecordsController {
      */
     public void createRecord(String text) {
 	if (text != null && !text.isEmpty()) {
-	    Record record = new Record();
+	    String record = new String();
 	    record.setValue(text);
 	    recordsDao.create(record);
 	}
@@ -46,9 +46,9 @@ public class RecordsController {
     
     /**
      * Update existed Record
-     * @param record the {@link Record} value
+     * @param record the {@link String} value
      */
-    public void updateRecord(Record record){
+    public void updateRecord(String record){
 	if (record != null && record.getValue() != null && !record.getValue().isEmpty() && record.getId() != 0){
 	    recordsDao.update(record);
 	}
@@ -56,9 +56,9 @@ public class RecordsController {
     
     /**
      * Delete stored Record
-     * @param record the {@link Record} object
+     * @param record the {@link String} object
      */
-    public void deleteRecord(Record record){
+    public void deleteRecord(String record){
 	if (record != null && record.getId() != 0){
 	    recordsDao.delete(record);
 	}

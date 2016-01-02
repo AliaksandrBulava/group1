@@ -16,7 +16,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import jmp.yury.kiryla.structural_patterns_task1.beans.Record;
+import jmp.yury.kiryla.structural_patterns_task1.beans.String;
 import jmp.yury.kiryla.structural_patterns_task1.controller.RecordsController;
 
 /**
@@ -71,7 +71,7 @@ public class App extends Application {
     /**
      * {@link ListView}
      */
-    private ListView<Record> listView;
+    private ListView<String> listView;
 
     /**
      * @param args
@@ -199,7 +199,7 @@ public class App extends Application {
 	    Scene scene = new Scene(flowPane, 350, 150);
 	    stage.setScene(scene);
 
-	    Record record = listView.selectionModelProperty().get().getSelectedItem();
+	    String record = listView.selectionModelProperty().get().getSelectedItem();
 	    TextField textField = new TextField();
 	    textField.setText(record.getValue());
 	    textField.setPrefColumnCount(28);
@@ -237,7 +237,7 @@ public class App extends Application {
     private Button createButtonDelete() {
 	Button button = new Button(DELETE_BUTTON_TITLE);
 	button.setOnAction(ae -> {
-	    Record record = listView.selectionModelProperty().get().getSelectedItem();
+	    String record = listView.selectionModelProperty().get().getSelectedItem();
 	    if (record != null) {
 		recordsController.deleteRecord(record);
 		listView.setItems(recordsController.getRecords());

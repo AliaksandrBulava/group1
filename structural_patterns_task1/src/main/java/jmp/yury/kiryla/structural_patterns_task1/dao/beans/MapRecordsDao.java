@@ -3,81 +3,78 @@
  */
 package jmp.yury.kiryla.structural_patterns_task1.dao.beans;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import jmp.yury.kiryla.structural_patterns_task1.beans.Record;
+import jmp.yury.kiryla.structural_patterns_task1.beans.RecordsList;
 import jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao;
 
 /**
- * {@link Map} implementation {@link RecordsDao}
- * 
+ * Map implementation {@link RecordsDao}
+ *
+ * does not synchronized
  * @author Yury
+ *
  *
  */
 public class MapRecordsDao implements RecordsDao {
     /**
-     * records map
+     * For RecordsLists storing
      */
-    private Map<Long, Record> records = new HashMap<>();
-    
-    /**
-     * ID counter
-     */
-    private long idCounter = 1;
+    private Map<Long, RecordsList> recordsMap = new HashMap<>();
 
     /**
-     * @see jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao#create(jmp.yury.kiryla.structural_patterns_task1.beans.Record)
+     * For set id
+     */
+    private long idCounter = 1;
+    
+    /**
+     * @see jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao#create(jmp.yury.kiryla.structural_patterns_task1.beans.RecordsList)
      */
     @Override
-    public void create(Record record) {
-	if (record.getId() != 0){
-	    throw new IllegalArgumentException("Record already created");
+    public void create(RecordsList recordsList) {
+	if (recordsList.getId() != 0){
+	    throw new IllegalArgumentException("Records List is not new");
 	}
-	record.setId(idCounter++);
-	records.put(record.getId(), record.clone());
+	
+	recordsList.setId(idCounter);
+	recordsMap.put(idCounter++, recordsList);
     }
 
     /**
      * @see jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao#read(long)
      */
     @Override
-    public Record read(long id) {
-	if (records.containsKey(id)){
-	    return records.get(id).clone();
-	}
-	return null;
+    public RecordsList read(long id) {
+	return recordsMap.get(id);
     }
 
     /**
      * @see jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao#read()
      */
     @Override
-    public Record[] read() {
-	return records.entrySet().stream().map(t -> t.getValue().clone()).toArray(Record[]::new);
+    public List<RecordsList> read() {
+	return recordsMap.isEmpty() ? null : new ArrayList<>(recordsMap.values());
     }
 
     /**
-     * @see jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao#update(jmp.yury.kiryla.structural_patterns_task1.beans.Record)
+     * @see jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao#update(jmp.yury.kiryla.structural_patterns_task1.beans.RecordsList)
      */
     @Override
-    public void update(Record record) {
-	if(records.containsKey(record.getId())){
-	    records.put(record.getId(), record);
-	} else {
-	    throw new IllegalArgumentException("Record is not existed");
-	}	
-    }
-
-    /**
-     * @see jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao#delete(jmp.yury.kiryla.structural_patterns_task1.beans.Record)
-     */
-    @Override
-    public void delete(Record record) {
-	if(records.remove(record.getId()) == null){
-	    throw new IllegalArgumentException("Record is not existed");
+    public void update(RecordsList recordsList) {
+	if (recordsList.getId() == 0) {
+	    throw new IllegalArgumentException("RecordsList was not created");
 	}
+	recordsMap.put(recordsList.getId(), recordsList);
     }
 
-    
+    /**
+     * @see jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao#delete(jmp.yury.kiryla.structural_patterns_task1.beans.RecordsList)
+     */
+    @Override
+    public void delete(RecordsList recordsList) {
+	recordsMap.remove(recordsList.getId());
+    }
 }

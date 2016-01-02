@@ -3,7 +3,9 @@
  */
 package jmp.yury.kiryla.structural_patterns_task1.dao;
 
-import jmp.yury.kiryla.structural_patterns_task1.beans.Record;
+import java.util.List;
+
+import jmp.yury.kiryla.structural_patterns_task1.beans.RecordsList;
 
 /**
  * Records DAO interface
@@ -13,33 +15,33 @@ import jmp.yury.kiryla.structural_patterns_task1.beans.Record;
  */
 public interface RecordsDao {
     /**
-     * Store new record
-     * @param record the {@link Record} object
+     * Store new records list
+     * @param record list of records
      */
-    public void create(Record record);
+    public void create(RecordsList recordsList);
 
     /**
-     * Read record object
+     * Read records list object
      * @param id ID value
-     * @return the {@link Record} object, <code>null</code> if Record with requested ID was not created
+     * @return the {@link RecordsList} object <br> <code>null</code> if RecordsList with requested ID was not created
      */
-    public Record read(long id);
+    public RecordsList read(long id);
     
     /**
-     * Read all stored {@link Record}s
-     * @return Records array
+     * Read all stored {@link RecordsList}s
+     * @return RecordsLists List
      */
-    public Record[] read();
+    public List<RecordsList> read();
     
     /**
-     * Update existed record
-     * @param record the {@link Record} object
+     * Update existed RecordsList
+     * @param record the {@link String} object
      */
-    public void update(Record record);
+    public void update(RecordsList recordsList);
     
     /**
-     * Delete Record
-     * @param record the {@link Record} object
+     * Delete RecordsList
+     * @param record the {@link RecordsList} object
      */
-    public void delete(Record record);
+    public void delete(RecordsList recordsList);
 }
