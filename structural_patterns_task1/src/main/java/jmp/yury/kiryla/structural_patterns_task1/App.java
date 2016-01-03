@@ -13,8 +13,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import jmp.yury.kiryla.structural_patterns_task1.beans.RecordsList;
+import jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao;
 import jmp.yury.kiryla.structural_patterns_task1.dao.beans.MapRecordsDao;
 import jmp.yury.kiryla.structural_patterns_task1.services.RecordsViewService;
+import jmp.yury.kiryla.structural_patterns_task1.services.beans.MoveRecordsServiceBean;
+import jmp.yury.kiryla.structural_patterns_task1.services.beans.RecordsViewMoveServiceAdaptor;
 import jmp.yury.kiryla.structural_patterns_task1.services.beans.RecordsViewServiceBean;
 
 /**
@@ -65,7 +68,13 @@ public class App extends Application {
     @Override
     public void init() throws Exception {
 	super.init();
-	recordsViewService = new RecordsViewServiceBean(new MapRecordsDao());
+	
+	RecordsDao recordsDao = new MapRecordsDao();
+	// Basic functionality
+//	recordsViewService = new RecordsViewServiceBean(recordsDao);
+	
+	// Adapter based functionality
+	recordsViewService = new RecordsViewMoveServiceAdaptor(recordsDao, new MoveRecordsServiceBean(recordsDao));
     }
 
     /**
