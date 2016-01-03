@@ -35,6 +35,7 @@ public interface RecordsDao {
     
     /**
      * Update existed RecordsList
+     * Update Records List name is not supported
      * @param record the {@link String} object
      */
     public void update(RecordsList recordsList);

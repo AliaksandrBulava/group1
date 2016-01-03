@@ -3,7 +3,7 @@
  */
 package jmp.yury.kiryla.structural_patterns_task1.beans;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * List records
@@ -20,12 +20,12 @@ public class RecordsList {
     /**
      * List's name
      */
-    private String Name;
+    private String name;
 
     /**
      * Records list
      */
-    private List<String> records;
+    private Set<String> records;
 
     /**
      * @return the id
@@ -45,27 +45,37 @@ public class RecordsList {
      * @return the name
      */
     public String getName() {
-        return Name;
+        return name;
     }
 
     /**
      * @param name the name to set
      */
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     /**
      * @return the records
      */
-    public List<String> getRecords() {
+    public Set<String> getRecords() {
         return records;
     }
 
     /**
      * @param records the records to set
      */
-    public void setRecords(List<String> records) {
+    public void setRecords(Set<String> records) {
         this.records = records;
     }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	return name;
+    }
+    
+    
 }

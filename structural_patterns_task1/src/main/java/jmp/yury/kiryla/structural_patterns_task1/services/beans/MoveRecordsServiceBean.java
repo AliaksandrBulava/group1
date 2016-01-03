@@ -3,7 +3,7 @@
  */
 package jmp.yury.kiryla.structural_patterns_task1.services.beans;
 
-import java.util.List;
+import java.util.Set;
 
 import jmp.yury.kiryla.structural_patterns_task1.beans.RecordsList;
 import jmp.yury.kiryla.structural_patterns_task1.dao.RecordsDao;
@@ -35,10 +35,10 @@ public class MoveRecordsServiceBean implements MoveRecordsService {
      */
     @Override
     public void move(RecordsList source, RecordsList target) {
-	List<String> records = source.getRecords();
+	Set<String> records = source.getRecords();
 	
 	if (records != null && !records.isEmpty()) {
-	    List<String> targetRecords = target.getRecords();
+	    Set<String> targetRecords = target.getRecords();
 	    if (targetRecords == null){
 		target.setRecords(records);
 	    } else {

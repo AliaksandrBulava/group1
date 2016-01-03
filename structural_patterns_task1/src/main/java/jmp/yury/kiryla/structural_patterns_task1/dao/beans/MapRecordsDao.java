@@ -39,6 +39,16 @@ public class MapRecordsDao implements RecordsDao {
 	    throw new IllegalArgumentException("Records List is not new");
 	}
 	
+	String name = recordsList.getName();
+	
+	if (name == null || name.isEmpty()){
+	    throw new IllegalArgumentException("Name is required field for Records List");
+	}
+	
+	if (recordsMap.values().stream().anyMatch(item -> item.getName().equals(name))){
+	    throw new IllegalArgumentException("Records List with the same name exists");
+	}
+	
 	recordsList.setId(idCounter);
 	recordsMap.put(idCounter++, recordsList);
     }
@@ -67,7 +77,7 @@ public class MapRecordsDao implements RecordsDao {
 	if (recordsList.getId() == 0) {
 	    throw new IllegalArgumentException("RecordsList was not created");
 	}
-	recordsMap.put(recordsList.getId(), recordsList);
+	recordsMap.get(recordsList.getId()).setRecords(recordsList.getRecords());
     }
 
     /**
