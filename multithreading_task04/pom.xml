@@ -40,6 +40,15 @@ public class Car implements Runnable {
 		<java.version>1.6</java.version>
 	</properties>
 	
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		
+	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>
