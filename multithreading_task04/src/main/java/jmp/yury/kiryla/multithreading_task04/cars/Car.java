@@ -21,7 +21,7 @@ public class Car implements Runnable {
     
     public Car(String name, long friction) {
         this.name = name;
-        this.friction = 100;
+        this.friction = friction;
     }
 
     @Override
