@@ -19,6 +19,8 @@ public class Car implements Runnable {
     
     private String name;
     
+    private boolean isDisqualified = false;
+    
     public Car(String name, long friction) {
         this.name = name;
         this.friction = friction;
@@ -29,6 +31,12 @@ public class Car implements Runnable {
         try {
             while (distance < MAX_DISTANCE) {
                 Thread.sleep(friction);
+                
+                if (isDisqualified) {
+                    log.info(name + " is diqualified");
+                    break;
+                }
+                
                 distance += 100;
                 log.info(name + " " + distance);
             }
@@ -36,4 +44,27 @@ public class Car implements Runnable {
             log.error(e);
         }
     }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+    
+    /**
+     * disqualify car
+     */
+    public void disqualify(){
+	isDisqualified = true;
+    }
+
+    /**
+     * @return the isDisqualified
+     */
+    public boolean isDisqualified() {
+        return isDisqualified;
+    }
+    
+    
 }
