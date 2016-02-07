@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Yury
  *
  */
-public class FirstThread implements Runnable {
+public class FirstThreadImpl implements Runnable {
     /**
      * {@link Collection}
      */
@@ -26,7 +26,7 @@ public class FirstThread implements Runnable {
     /**
      * @param list
      */
-    public FirstThread(List<Integer> list) {
+    public FirstThreadImpl(List<Integer> list) {
 	super();
 	this.list = list;
     }

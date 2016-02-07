@@ -6,9 +6,9 @@ package jmp.yury.kiryla.multithreading_task11;
 import java.util.ArrayList;
 import java.util.List;
 
-import jmp.yury.kiryla.multithreading_task11.threads.FirstThread;
-import jmp.yury.kiryla.multithreading_task11.threads.SecondThread;
-import jmp.yury.kiryla.multithreading_task11.threads.ThirdThread;
+import jmp.yury.kiryla.multithreading_task11.threads.FirstThreadImpl;
+import jmp.yury.kiryla.multithreading_task11.threads.SecondThreadImpl;
+import jmp.yury.kiryla.multithreading_task11.threads.ThirdThreadImpl;
 
 /**
  * @author Yury
@@ -23,21 +23,27 @@ public class App {
     public static void main(String[] args) throws InterruptedException {
 	List<Integer> collection = new ArrayList<Integer>();
 
-	Thread firstThread = new Thread(new FirstThread(collection));
+	FirstThreadImpl firstThreadImpl = new FirstThreadImpl(collection);
+	Thread firstThread = new Thread(firstThreadImpl);
 	firstThread.start();
 	
-	Thread secondThread = new Thread(new SecondThread(collection));
+	SecondThreadImpl secondThreadImpl = new SecondThreadImpl(collection);
+	Thread secondThread = new Thread(secondThreadImpl);
 	secondThread.start();
 	
-	Thread thirdThread = new Thread(new ThirdThread(collection));
+	ThirdThreadImpl thirdThreadImpl = new ThirdThreadImpl(collection);
+	Thread thirdThread = new Thread(thirdThreadImpl);
 	thirdThread.start();
 	
-	while (firstThread.isAlive()){
-	    Thread.sleep(100);
-	}
+	firstThread.join();
 	
-	secondThread.interrupt();
-	thirdThread.interrupt();
+	secondThreadImpl.setStopFlag(true);
+	thirdThreadImpl.setStopFlag(true);
+	
+	secondThread.join();
+	thirdThread.join();
+	
+	System.out.println("Complete");
     }
 
 }

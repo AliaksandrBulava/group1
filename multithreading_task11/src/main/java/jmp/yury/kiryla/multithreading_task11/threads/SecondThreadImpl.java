@@ -12,16 +12,21 @@ import java.util.List;
  * @author Yury
  *
  */
-public class SecondThread implements Runnable {
+public class SecondThreadImpl implements Runnable {
     /**
      * {@link Collection}
      */
     private List<Integer> list;
+    
+    /**
+     * Indicate that thread will be finished
+     */
+    private boolean stopFlag = false;
 
     /**
      * @param list
      */
-    public SecondThread(List<Integer> list) {
+    public SecondThreadImpl(List<Integer> list) {
 	super();
 	this.list = list;
     }
@@ -31,7 +36,7 @@ public class SecondThread implements Runnable {
      */
     @Override
     public void run() {
-	while (true) {
+	while (!stopFlag) {
 
 	    int sum = 0;
 
@@ -43,6 +48,13 @@ public class SecondThread implements Runnable {
 
 	    System.out.println("Sum of the numbers:" + sum);
 	}
+    }
+
+    /**
+     * @param stopFlag the stopFlag to set
+     */
+    public void setStopFlag(boolean stopFlag) {
+        this.stopFlag = stopFlag;
     }
 
 }

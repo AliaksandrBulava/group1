@@ -13,17 +13,22 @@ import java.util.List;
  * @author Yury
  *
  */
-public class ThirdThread implements Runnable {
+public class ThirdThreadImpl implements Runnable {
 
     /**
      * {@link Collection}
      */
     private List<Integer> list;
+    
+    /**
+     * Indicate that thread will be finished
+     */
+    private boolean stopFlag = false;
 
     /**
      * @param list
      */
-    public ThirdThread(List<Integer> list) {
+    public ThirdThreadImpl(List<Integer> list) {
 	super();
 	this.list = list;
     }
@@ -33,7 +38,7 @@ public class ThirdThread implements Runnable {
      */
     @Override
     public void run() {
-	while (true) {
+	while (!stopFlag) {
 	    double sqSum = 0;
 	    List<Integer> localList = new ArrayList<Integer>(list);
 
@@ -43,6 +48,13 @@ public class ThirdThread implements Runnable {
 	    System.out.println("Square root sum: " + sqSum);
 	}
 
+    }
+
+    /**
+     * @param stopFlag the stopFlag to set
+     */
+    public void setStopFlag(boolean stopFlag) {
+        this.stopFlag = stopFlag;
     }
 
 }
