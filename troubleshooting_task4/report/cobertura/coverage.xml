@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+
+<coverage line-rate="0.44" branch-rate="0.25" lines-covered="11" lines-valid="25" branches-covered="1" branches-valid="4" complexity="1.5" version="2.1.1" timestamp="1455312829666">
+	<sources>
+		<source>--source</source>
+		<source>e:/Git/group1/troubleshooting_task4/target/generated-sources/annotations</source>
+		<source>e:/Git/group1/troubleshooting_task4/src/main/java</source>
+	</sources>
+	<packages>
+		<package name="jmp.yury.kiryla.troubleshooting_task4" line-rate="0.0" branch-rate="0.0" complexity="2.0">
+			<classes>
+				<class name="jmp.yury.kiryla.troubleshooting_task4.App" filename="jmp/yury/kiryla/troubleshooting_task4/App.java" line-rate="0.0" branch-rate="0.0" complexity="2.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="13" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="main" signature="([Ljava/lang/String;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
+							<lines>
+								<line number="21" hits="0" branch="false"/>
+								<line number="22" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="23" hits="0" branch="false"/>
+								<line number="26" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="13" hits="0" branch="false"/>
+						<line number="21" hits="0" branch="false"/>
+						<line number="22" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="23" hits="0" branch="false"/>
+						<line number="26" hits="0" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+		<package name="jmp.yury.kiryla.troubleshooting_task4.impl" line-rate="0.55" branch-rate="0.5" complexity="1.4">
+			<classes>
+				<class name="jmp.yury.kiryla.troubleshooting_task4.impl.Executor" filename="jmp/yury/kiryla/troubleshooting_task4/impl/Executor.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Ljmp/yury/kiryla/troubleshooting_task4/impl/Resource;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="25" hits="0" branch="false"/>
+								<line number="26" hits="0" branch="false"/>
+								<line number="27" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="run" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="34" hits="0" branch="false"/>
+								<line number="35" hits="0" branch="false"/>
+								<line number="36" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="25" hits="0" branch="false"/>
+						<line number="26" hits="0" branch="false"/>
+						<line number="27" hits="0" branch="false"/>
+						<line number="34" hits="0" branch="false"/>
+						<line number="35" hits="0" branch="false"/>
+						<line number="36" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="jmp.yury.kiryla.troubleshooting_task4.impl.Resource" filename="jmp/yury/kiryla/troubleshooting_task4/impl/Resource.java" line-rate="0.7857142857142857" branch-rate="0.5" complexity="1.6666666666666667">
+					<methods>
+						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="21" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="27" hits="1" branch="false"/>
+								<line number="28" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="getInstance" signature="()Ljmp/yury/kiryla/troubleshooting_task4/impl/Resource;" line-rate="1.0" branch-rate="0.5" complexity="0">
+							<lines>
+								<line number="34" hits="1" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="35" hits="1" branch="false"/>
+								<line number="37" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="getValue" signature="()Ljava/lang/String;" line-rate="0.625" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="41" hits="1" branch="false"/>
+								<line number="43" hits="1" branch="false"/>
+								<line number="46" hits="1" branch="false"/>
+								<line number="47" hits="0" branch="false"/>
+								<line number="48" hits="0" branch="false"/>
+								<line number="49" hits="1" branch="false"/>
+								<line number="51" hits="1" branch="false"/>
+								<line number="52" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="21" hits="1" branch="false"/>
+						<line number="27" hits="1" branch="false"/>
+						<line number="28" hits="1" branch="false"/>
+						<line number="34" hits="1" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="35" hits="1" branch="false"/>
+						<line number="37" hits="1" branch="false"/>
+						<line number="41" hits="1" branch="false"/>
+						<line number="43" hits="1" branch="false"/>
+						<line number="46" hits="1" branch="false"/>
+						<line number="47" hits="0" branch="false"/>
+						<line number="48" hits="0" branch="false"/>
+						<line number="49" hits="1" branch="false"/>
+						<line number="51" hits="1" branch="false"/>
+						<line number="52" hits="0" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>
