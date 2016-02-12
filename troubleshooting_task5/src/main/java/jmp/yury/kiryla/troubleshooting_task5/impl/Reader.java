@@ -25,7 +25,9 @@ public class Reader {
 	    while (scanner.hasNextLine()) {
 		String line = scanner.nextLine();
 		String entry = line.substring(0, 3);
-		lines.add(entry);
+		
+		// Memory leak was resolved by adding intern() method
+		lines.add(entry.intern());
 		
 		// Just for get heap dump
 		Thread.sleep(10);
