@@ -4,6 +4,8 @@
 package jmp.yury.kiryla.troubleshooting_task1.threads;
 
 /**
+ * Class for demonstrate deadlock
+ * 
  * @author Yury_Kiryla
  *
  */
@@ -19,8 +21,10 @@ public class SynchronizedThread implements Runnable {
 	private Object lock2;
 
 	/**
-	 * @param lock1
-	 * @param lock2
+	 * Constructor
+	 * 
+	 * @param lock1 1st locking object
+	 * @param lock2 2nd locking object
 	 */
 	public SynchronizedThread(Object lock1, Object lock2) {
 		super();
