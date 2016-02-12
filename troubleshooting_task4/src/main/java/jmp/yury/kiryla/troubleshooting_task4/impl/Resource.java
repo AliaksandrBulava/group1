@@ -14,6 +14,11 @@ public class Resource {
      * Value returned from Resource
      */
     private static final String VALUE = "Value";
+    
+    /**
+     * Specially for FindBug
+     */
+    private int testInt;
 
     /**
      * Resource instance
