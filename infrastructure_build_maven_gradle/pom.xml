@@ -20,6 +20,7 @@ Make compliable and deployable to Tomcat. In addition to that, I recommend to ap
 	<modules>
 		<module>beans</module>
 		<module>dao</module>
+		<module>services</module>
 	</modules>
 
 	<properties>
