@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>jmp.yury.kiryla</groupId>
+	<artifactId>infrastructure_build_maven_gradle</artifactId>
+	<version>0.0.1</version>
+	<packaging>pom</packaging>
+	<name>Gradle and Maven Task</name>
+	<description>Create executable multi-module project with the following structure:
+
+1)      DAO
+
+2)      Business Logic
+
+3)      UI (Web) or command line
+
+Make compliable and deployable to Tomcat. In addition to that, I recommend to apply unit tests.</description>
+</project>
+
+<properties>
+	<java.version>1.8</java.version>
+</properties>
+
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.3</version>
+			<configuration>
+				<source>${java.version}</source>
+				<target>${java.version}</target>
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
