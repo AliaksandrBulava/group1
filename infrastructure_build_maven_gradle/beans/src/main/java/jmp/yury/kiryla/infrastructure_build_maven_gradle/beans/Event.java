@@ -14,7 +14,7 @@ import java.time.LocalTime;
  *
  */
 public class Event {
-    
+
     /**
      * ID
      */
@@ -29,104 +29,110 @@ public class Event {
      * {@link Auditorium}
      */
     private Auditorium auditorium;
-    
+
     /**
      * Date
      */
     private LocalDate date;
-    
+
     /**
      * time
      */
-    private LocalTime time;
-    
+    private LocalTime startTime;
+
     /**
      * duration
      */
-    private Duration duration;
+    private Duration endTime;
 
     /**
      * @return the id
      */
     public long getId() {
-        return id;
+	return id;
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *            the id to set
      */
     public void setId(long id) {
-        this.id = id;
+	this.id = id;
     }
 
     /**
      * @return the name
      */
     public String getName() {
-        return name;
+	return name;
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
     /**
      * @return the auditorium
      */
     public Auditorium getAuditorium() {
-        return auditorium;
+	return auditorium;
     }
 
     /**
-     * @param auditorium the auditorium to set
+     * @param auditorium
+     *            the auditorium to set
      */
     public void setAuditorium(Auditorium auditorium) {
-        this.auditorium = auditorium;
+	this.auditorium = auditorium;
     }
 
     /**
      * @return the date
      */
     public LocalDate getDate() {
-        return date;
+	return date;
     }
 
     /**
-     * @param date the date to set
+     * @param date
+     *            the date to set
      */
     public void setDate(LocalDate date) {
-        this.date = date;
+	this.date = date;
     }
 
     /**
-     * @return the time
+     * @return the startTime
      */
-    public LocalTime getTime() {
-        return time;
+    public LocalTime getStartTime() {
+	return startTime;
     }
 
     /**
-     * @param time the time to set
+     * @param startTime
+     *            the startTime to set
      */
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setStartTime(LocalTime startTime) {
+	this.startTime = startTime;
     }
 
     /**
-     * @return the duration
+     * @return the endTime
      */
-    public Duration getDuration() {
-        return duration;
+    public Duration getEndTime() {
+	return endTime;
     }
 
     /**
-     * @param duration the duration to set
+     * @param endTime
+     *            the endTime to set
      */
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setEndTime(Duration endTime) {
+	this.endTime = endTime;
     }
 
     /**
@@ -134,9 +140,8 @@ public class Event {
      */
     @Override
     public String toString() {
-	return "Event [name=" + name + ", auditorium=" + auditorium + ", date=" + date + ", time=" + time
-		+ ", duration=" + duration + "]";
+	return "Event [name=" + name + ", auditorium=" + auditorium + ", date=" + date + ", startTime=" + startTime
+		+ ", endTime=" + endTime + "]";
     }
-    
-    
+
 }
