@@ -45,7 +45,7 @@ public interface EventDAO {
      * @param name Name
      * @return {@link Event}
      */
-    public Event getEvents(String name);
+    public Event getEvent(String name);
     
     /**
      * Get all Events
