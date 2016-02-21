@@ -19,11 +19,20 @@ Make compliable and deployable to Tomcat. In addition to that, I recommend to ap
 
 	<modules>
 		<module>beans</module>
+		<module>dao</module>
 	</modules>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>jmp.yury.kiryla</groupId>
+			<artifactId>beans</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+	</dependencies>
 	
 	<build>
 	<plugins>
