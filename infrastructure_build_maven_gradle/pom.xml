@@ -15,6 +15,8 @@
 3)      UI (Web) or command line
 
 Make compliable and deployable to Tomcat. In addition to that, I recommend to apply unit tests.</description>
+
+
 	<modules>
 		<module>beans</module>
 	</modules>
