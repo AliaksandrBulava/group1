@@ -19,37 +19,37 @@ public interface UserDAO {
      * 
      * @param user the {@link User} object
      */
-    public void save(User user);
+    public void saveUser(User user);
     
     /**
      * Update existed user
      * @param user the {@link User} object
      */
-    public void update(User user);
+    public void updateUser(User user);
     
     /**
      * Remove existed user
      * @param user the {@link User} object
      */
-    public void remove(User user);
+    public void removeUser(User user);
     
     /**
      * Get User by id
      * @param id ID value
      * @return {@link User}
      */
-    public User get(long id);
+    public User getUser(long id);
     
     /**
      * Get User by name
      * @param name Name
      * @return {@link User}
      */
-    public User get(String name);
+    public User getUser(String name);
     
     /**
      * Get all Users
      * @return {@link User}s list
      */
-    public List<User> get();
+    public List<User> getUsers();
 }
