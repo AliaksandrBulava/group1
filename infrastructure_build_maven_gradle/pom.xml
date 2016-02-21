@@ -15,13 +15,15 @@
 3)      UI (Web) or command line
 
 Make compliable and deployable to Tomcat. In addition to that, I recommend to apply unit tests.</description>
-</project>
+	<modules>
+		<module>beans</module>
+	</modules>
 
-<properties>
-	<java.version>1.8</java.version>
-</properties>
-
-<build>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	
+	<build>
 	<plugins>
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
@@ -34,3 +36,4 @@ Make compliable and deployable to Tomcat. In addition to that, I recommend to ap
 		</plugin>
 	</plugins>
 </build>
+</project>
