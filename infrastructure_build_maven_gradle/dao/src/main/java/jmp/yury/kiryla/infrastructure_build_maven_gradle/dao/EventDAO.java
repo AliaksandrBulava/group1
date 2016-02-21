@@ -19,37 +19,37 @@ public interface EventDAO {
      * 
      * @param event the {@link Event} object
      */
-    public void save(Event event);
+    public void saveEvent(Event event);
     
     /**
      * Update existed Event
      * @param event the {@link Event} object
      */
-    public void update(Event event);
+    public void updateEvent(Event event);
     
     /**
      * Remove existed Event
      * @param event the {@link Event} object
      */
-    public void remove(Event event);
+    public void removeEvent(Event event);
     
     /**
      * Get Event by id
      * @param id ID value
      * @return {@link Event}
      */
-    public Event get(long id);
+    public Event getEvent(long id);
     
     /**
      * Get Event by name
      * @param name Name
      * @return {@link Event}
      */
-    public Event get(String name);
+    public Event getEvents(String name);
     
     /**
      * Get all Events
      * @return {@link Event}s list
      */
-    public List<Event> get();
+    public List<Event> getEvents();
 }
