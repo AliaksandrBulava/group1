@@ -19,6 +19,13 @@ public class DAOException extends RuntimeException {
     private static final long serialVersionUID = 1320019258391551059L;
 
     /**
+     * @param message
+     */
+    public DAOException(String message) {
+	super(message);
+    }
+
+    /**
      * Constructor
      * 
      * @param message
