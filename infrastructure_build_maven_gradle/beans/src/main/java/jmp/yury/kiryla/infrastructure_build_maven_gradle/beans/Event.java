@@ -3,7 +3,6 @@
  */
 package jmp.yury.kiryla.infrastructure_build_maven_gradle.beans;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -43,7 +42,7 @@ public class Event {
     /**
      * duration
      */
-    private Duration endTime;
+    private LocalTime endTime;
 
     /**
      * @return the id
@@ -123,7 +122,7 @@ public class Event {
     /**
      * @return the endTime
      */
-    public Duration getEndTime() {
+    public LocalTime getEndTime() {
 	return endTime;
     }
 
@@ -131,7 +130,7 @@ public class Event {
      * @param endTime
      *            the endTime to set
      */
-    public void setEndTime(Duration endTime) {
+    public void setEndTime(LocalTime endTime) {
 	this.endTime = endTime;
     }
 
