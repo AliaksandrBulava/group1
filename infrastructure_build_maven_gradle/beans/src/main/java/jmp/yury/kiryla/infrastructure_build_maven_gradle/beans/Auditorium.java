@@ -24,7 +24,7 @@ public class Auditorium {
     /**
      * @return the id
      */
-    public synchronized long getId() {
+    public long getId() {
 	return id;
     }
 
@@ -32,14 +32,14 @@ public class Auditorium {
      * @param id
      *            the id to set
      */
-    public synchronized void setId(long id) {
+    public void setId(long id) {
 	this.id = id;
     }
 
     /**
      * @return the name
      */
-    public synchronized String getName() {
+    public String getName() {
 	return name;
     }
 
@@ -47,7 +47,7 @@ public class Auditorium {
      * @param name
      *            the name to set
      */
-    public synchronized void setName(String name) {
+    public void setName(String name) {
 	this.name = name;
     }
 
