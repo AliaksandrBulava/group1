@@ -49,7 +49,7 @@ public class ServletContextListenerImpl implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 	if (dataSource == null) {
 	    JdbcDataSource jdbcDataSource = new JdbcDataSource();
-	    jdbcDataSource.setURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;INIT=runscript from '~/create.sql'\\");
+	    jdbcDataSource.setURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;INIT=runscript from 'classpath:create.sql'");
 	    jdbcDataSource.setUser("sa");
 	    jdbcDataSource.setPassword("sa");
 	    dataSource = jdbcDataSource;
