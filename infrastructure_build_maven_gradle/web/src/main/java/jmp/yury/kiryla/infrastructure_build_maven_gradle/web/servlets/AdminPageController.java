@@ -30,7 +30,7 @@ public class AdminPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EventService eventService = (EventService) getServletContext().getAttribute(Constants.EVENT_SERVICE);
 		request.setAttribute("events", eventService.getAll());
-		response.sendRedirect(request.getContextPath() + "/jsp/admin.jsp");
+		getServletContext().getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
 	}
 
 	/**

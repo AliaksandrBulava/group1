@@ -20,23 +20,29 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="event" items="events">
+					<c:forEach var="event" items="${events }">
 						<tr>
-							<td>event.name</td>
-							<td>event.auditorium.name</td>
-							<td>event.date</td>
-							<td>event.startTime</td>
-							<td>event.endTime</td>
+							<td>${event.name }</td>
+							<td>${event.auditorium.name }</td>
+							<td>${event.date }</td>
+							<td>${event.startTime }</td>
+							<td>${event.endTime }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</c:if>
-		
-		<c:url value="/admin/event" var="eventUrl" />
-		<a href="${eventUrl}">Add Event</a>
-		<br>
-		<c:url value="/admin/auditorium" var="auditoriumUrl" />
-		<a href="${auditoriumUrl}">Add Auditorium</a>
+		<p>
+			<c:url value="/admin/event" var="eventUrl" />
+			<a href="${eventUrl}">Add Event</a>
+		</p>
+		<p>
+			<c:url value="/admin/auditorium" var="auditoriumUrl" />
+			<a href="${auditoriumUrl}">Add Auditorium</a>
+		</p>
+		<footer>
+			<c:url value="/home" var="homeUrl" />
+			<a href="${homeUrl}">Home</a>
+		</footer>
 	</body>
 </html>
