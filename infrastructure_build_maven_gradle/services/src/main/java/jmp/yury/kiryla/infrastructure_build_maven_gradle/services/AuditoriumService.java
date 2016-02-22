@@ -24,4 +24,11 @@ public interface AuditoriumService {
      * @return {@link Auditorium} list
      */
     public List<Auditorium> getAll();
+    
+    /**
+     * Get auditorium by id
+     * @param id ID
+     * @return {@link Auditorium}
+     */
+    public Auditorium get(long id);
 }

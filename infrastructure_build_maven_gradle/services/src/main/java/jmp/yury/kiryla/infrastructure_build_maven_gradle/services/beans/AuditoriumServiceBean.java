@@ -51,5 +51,13 @@ public class AuditoriumServiceBean implements AuditoriumService {
 		return auditoriumDAO.getAuditoriums();
 	}
 
+	/**
+	 * @see jmp.yury.kiryla.infrastructure_build_maven_gradle.services.AuditoriumService#get(long)
+	 */
+	@Override
+	public Auditorium get(long id) {
+		return auditoriumDAO.getAuditorium(id);
+	}
+
     
 }
