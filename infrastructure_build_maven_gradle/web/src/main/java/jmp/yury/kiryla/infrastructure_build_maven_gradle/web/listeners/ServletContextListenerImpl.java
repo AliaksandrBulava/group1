@@ -11,6 +11,7 @@ import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.AuditoriumDAO;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.EventDAO;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.TicketDAO;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.UserDAO;
+import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.jdbc.AbstractJdbcDAO;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.jdbc.AuditoriumJdbcDAO;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.jdbc.EventJdbcDAO;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.jdbc.TicketJdbcDAO;
@@ -50,10 +51,11 @@ public class ServletContextListenerImpl implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 	if (dataSource == null) {
 	    JdbcDataSource jdbcDataSource = new JdbcDataSource();
-	    jdbcDataSource.setURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;INIT=runscript from 'classpath:create.sql'");
+	    jdbcDataSource.setURL("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
 	    jdbcDataSource.setUser("sa");
 	    jdbcDataSource.setPassword("sa");
 	    dataSource = jdbcDataSource;
+	    AbstractJdbcDAO.dbInit(dataSource);
 	}
 	
 	UserDAO userDAO = UserJdbcDAO.getInstance(dataSource);
