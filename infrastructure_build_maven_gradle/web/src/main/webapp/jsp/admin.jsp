@@ -35,6 +35,7 @@
 		
 		<c:url value="/admin/event" var="eventUrl" />
 		<a href="${adminUrl}">Add Event</a>
+		<br>
 		<c:url value="/admin/auditorium" var="userUrl" />
 		<a href="${userUrl}">Add Auditorium</a>
 	</body>
