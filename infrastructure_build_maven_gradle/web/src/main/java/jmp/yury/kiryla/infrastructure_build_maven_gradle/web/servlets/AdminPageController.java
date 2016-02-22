@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.EventService;
+import jmp.yury.kiryla.infrastructure_build_maven_gradle.web.Constants;
 
 /**
  * Servlet implementation class AdminPageController
@@ -27,7 +28,7 @@ public class AdminPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EventService eventService = (EventService) getServletContext().getAttribute("eventService");
+		EventService eventService = (EventService) getServletContext().getAttribute(Constants.USER_SERVICE);
 		request.setAttribute("events", eventService.getAll());
 		response.sendRedirect(request.getContextPath() + "/jsp/admin.jsp");
 	}

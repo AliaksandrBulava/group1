@@ -23,6 +23,7 @@ import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.beans.Auditori
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.beans.BookingServiceBean;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.beans.EventServiceBean;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.beans.UserServiceBean;
+import jmp.yury.kiryla.infrastructure_build_maven_gradle.web.Constants;
 
 /**
  * Application Lifecycle Listener implementation class
@@ -65,10 +66,10 @@ public class ServletContextListenerImpl implements ServletContextListener {
 	EventService eventService = new EventServiceBean(eventDAO);
 	BookingService bookingService = new BookingServiceBean(ticketDAO);
 	
-	sce.getServletContext().setAttribute("userService", userService);
-	sce.getServletContext().setAttribute("auditoriumService", auditoriumService);
-	sce.getServletContext().setAttribute("eventService", eventService);
-	sce.getServletContext().setAttribute("bookingService", bookingService);
+	sce.getServletContext().setAttribute(Constants.USER_SERVICE, userService);
+	sce.getServletContext().setAttribute(Constants.AUDITORIUM_SERVICE, auditoriumService);
+	sce.getServletContext().setAttribute(Constants.EVENT_SERVICE, eventService);
+	sce.getServletContext().setAttribute(Constants.BOOKING_SERVICE, bookingService);
     }
 
 }
