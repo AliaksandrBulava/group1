@@ -30,19 +30,25 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.187</version>
 		</dependency>
-		
+
 		<dependency>
-				<groupId>jmp.yury.kiryla</groupId>
-				<artifactId>beans</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>jmp.yury.kiryla</groupId>
-				<artifactId>dao</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>jmp.yury.kiryla</groupId>
-				<artifactId>services</artifactId>
-			</dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jmp.yury.kiryla</groupId>
+			<artifactId>beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jmp.yury.kiryla</groupId>
+			<artifactId>dao</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jmp.yury.kiryla</groupId>
+			<artifactId>services</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
