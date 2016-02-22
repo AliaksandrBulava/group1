@@ -1,6 +1,8 @@
 package jmp.yury.kiryla.infrastructure_build_maven_gradle.web.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
+import jmp.yury.kiryla.infrastructure_build_maven_gradle.beans.Event;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.AuditoriumService;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.EventService;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.web.Constants;
@@ -57,7 +63,7 @@ public class EventPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("auditoriums", auditoriumService.getAll());
 		
-		response.sendRedirect(request.getContextPath() + "/jsp/event.jsp");
+		getServletContext().getRequestDispatcher("/jsp/event.jsp").forward(request, response);
 	}
 
 	/**
@@ -70,7 +76,22 @@ public class EventPageController extends HttpServlet {
 		String startTimeString = request.getParameter("eventStartTime");
 		String endTimeString = request.getParameter("eventEndTime");
 		
-		response.sendRedirect(request.getContextPath() + "/jsp/event.jsp");
+		String message;
+		
+		if (StringUtils.isNoneBlank(name, dateString, startTimeString, endTimeString) && NumberUtils.isNumber(auditoriumString)) {
+			Event event = eventService.register(name, auditoriumService.get(Long.parseLong(auditoriumString)), LocalDate.parse(dateString), LocalTime.parse(startTimeString), LocalTime.parse(endTimeString));
+			if (event != null) {
+				message = event + "created";
+			} else {
+				message = "Event have not created";
+			}
+		} else {
+			message = "Wrong data was entered";
+		}
+		
+		request.setAttribute("message", message);
+		
+		doGet(request, response);
 	}
 
 }

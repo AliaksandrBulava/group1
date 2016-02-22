@@ -15,7 +15,16 @@
 				<a href="${auditoriumUrl}">Add Auditorium</a>
 			</c:when>
 			<c:otherwise>
-				<form action="/admin/event" method="post">
+				<c:if test="${not empty message}">
+					<div>
+						<p>Result:</p>
+						<p>${message }</p>
+					</div>
+					<br>					
+				</c:if>
+				<p>Enter data</p>
+				<c:url value="/admin/event" var="eventUrl" />
+				<form action="${eventUrl }" method="post">
 					<table>
 						<tr>
 							<td>Name</td>
@@ -27,7 +36,7 @@
 							<td>Auditorium</td>
 							<td>
 								<select name="eventAuiditorium" required="required">
-									<c:forEach var="auditorium" items="auditoriums">
+									<c:forEach var="auditorium" items="${auditoriums}">
 										<option value="${auditorium.id}">${auditorium.name }</option>
 									</c:forEach>
 								</select>
@@ -52,8 +61,13 @@
 							</td>
 						</tr>
 					</table>
+					<input type="submit">
 				</form>
 			</c:otherwise>
 		</c:choose>
+		<footer>
+			<c:url value="/home" var="homeUrl" />
+			<a href="${homeUrl}">Home</a>
+		</footer>
 	</body>
 </html>

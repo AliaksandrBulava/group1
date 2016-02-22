@@ -93,7 +93,7 @@ public class EventServiceBean implements EventService {
 				return false;
 			});
 		} else {
-			return false;
+			return true;
 		}
 	}
 
