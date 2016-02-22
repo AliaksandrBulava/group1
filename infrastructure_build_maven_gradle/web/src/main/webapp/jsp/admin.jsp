@@ -34,9 +34,9 @@
 		</c:if>
 		
 		<c:url value="/admin/event" var="eventUrl" />
-		<a href="${adminUrl}">Add Event</a>
+		<a href="${eventUrl}">Add Event</a>
 		<br>
-		<c:url value="/admin/auditorium" var="userUrl" />
-		<a href="${userUrl}">Add Auditorium</a>
+		<c:url value="/admin/auditorium" var="auditoriumUrl" />
+		<a href="${auditoriumUrl}">Add Auditorium</a>
 	</body>
 </html>

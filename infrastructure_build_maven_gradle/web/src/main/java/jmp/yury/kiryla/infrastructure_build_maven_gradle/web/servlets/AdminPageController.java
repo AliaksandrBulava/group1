@@ -28,7 +28,7 @@ public class AdminPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EventService eventService = (EventService) getServletContext().getAttribute(Constants.USER_SERVICE);
+		EventService eventService = (EventService) getServletContext().getAttribute(Constants.EVENT_SERVICE);
 		request.setAttribute("events", eventService.getAll());
 		response.sendRedirect(request.getContextPath() + "/jsp/admin.jsp");
 	}
