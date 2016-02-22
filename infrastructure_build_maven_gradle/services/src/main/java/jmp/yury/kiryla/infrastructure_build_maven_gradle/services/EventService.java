@@ -40,4 +40,11 @@ public interface EventService {
      * @return {@link Event} list
      */
     public List<Event> getAll();
+    
+    /**
+     * Get event by id
+     * @param id ID
+     * @return {@link Event}
+     */
+    public Event get(long id);
 }

@@ -104,6 +104,14 @@ public class EventServiceBean implements EventService {
 	public List<Event> getAll() {
 		return eventDAO.getEvents();
 	}
+
+	/**
+	 * @see jmp.yury.kiryla.infrastructure_build_maven_gradle.services.EventService#get(long)
+	 */
+	@Override
+	public Event get(long id) {
+		return eventDAO.getEvent(id);
+	}
 	
 	
 }
