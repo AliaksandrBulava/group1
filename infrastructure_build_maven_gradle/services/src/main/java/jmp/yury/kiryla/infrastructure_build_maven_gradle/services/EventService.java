@@ -5,6 +5,7 @@ package jmp.yury.kiryla.infrastructure_build_maven_gradle.services;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.beans.Auditorium;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.beans.Event;
@@ -33,4 +34,10 @@ public interface EventService {
      * @param event {@link Event}
      */
     public void delete(Event event);
+    
+    /**
+     * Get all events
+     * @return {@link Event} list
+     */
+    public List<Event> getAll();
 }
