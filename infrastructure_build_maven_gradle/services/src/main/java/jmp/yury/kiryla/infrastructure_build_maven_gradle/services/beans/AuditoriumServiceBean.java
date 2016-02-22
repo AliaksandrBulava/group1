@@ -3,6 +3,8 @@
  */
 package jmp.yury.kiryla.infrastructure_build_maven_gradle.services.beans;
 
+import java.util.List;
+
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.beans.Auditorium;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.dao.AuditoriumDAO;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.AuditoriumService;
@@ -41,4 +43,13 @@ public class AuditoriumServiceBean implements AuditoriumService {
 	return null;
     }
 
+	/**
+	 * @see jmp.yury.kiryla.infrastructure_build_maven_gradle.services.AuditoriumService#getAll()
+	 */
+	@Override
+	public List<Auditorium> getAll() {
+		return auditoriumDAO.getAuditoriums();
+	}
+
+    
 }
