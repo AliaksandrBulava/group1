@@ -3,6 +3,8 @@
  */
 package jmp.yury.kiryla.infrastructure_build_maven_gradle.services.beans;
 
+import java.util.List;
+
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.beans.Event;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.beans.Ticket;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.beans.User;
@@ -43,4 +45,16 @@ public class BookingServiceBean implements BookingService {
 	return null;
     }
 
+	/**
+	 * @see jmp.yury.kiryla.infrastructure_build_maven_gradle.services.BookingService#get(jmp.yury.kiryla.infrastructure_build_maven_gradle.beans.User)
+	 */
+	@Override
+	public List<Ticket> get(User user) {
+		if (user != null) {
+			return ticketDAO.getTickets(user);
+		}
+		return null;
+	}
+
+    
 }
