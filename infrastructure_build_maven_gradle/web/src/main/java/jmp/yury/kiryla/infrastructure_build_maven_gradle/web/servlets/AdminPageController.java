@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.AuditoriumService;
 import jmp.yury.kiryla.infrastructure_build_maven_gradle.services.EventService;
 
 /**
