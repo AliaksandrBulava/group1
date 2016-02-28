@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EventServiceBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">services</a> &gt; <a href="index.source.html" class="el_package">jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.beans</a> &gt; <span class="el_source">EventServiceBean.java</span></div><h1>EventServiceBean.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.beans;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
+import jmp.yury.kiryla.infrastructure_unit_jmock_task05.beans.Auditorium;
+import jmp.yury.kiryla.infrastructure_unit_jmock_task05.beans.Event;
+import jmp.yury.kiryla.infrastructure_unit_jmock_task05.dao.EventDAO;
+import jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.EventService;
+
+/**
+ * {@link EventService} implementation
+ * 
+ * @author Yury
+ *
+ */
+public class EventServiceBean implements EventService {
+	/**
+	 * {@link EventDAO}
+	 */
+	private EventDAO eventDAO;
+
+	/**
+	 * @param eventDAO
+	 */
+	public EventServiceBean(EventDAO eventDAO) {
+<span class="nc" id="L31">		super();</span>
+<span class="nc" id="L32">		this.eventDAO = eventDAO;</span>
+<span class="nc" id="L33">	}</span>
+
+	/**
+	 * @see jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.EventService#register(java.lang.String,
+	 *      jmp.yury.kiryla.infrastructure_unit_jmock_task05.beans.Auditorium,
+	 *      java.time.LocalDate, java.time.LocalTime, java.time.LocalTime)
+	 */
+	@Override
+	public Event register(String name, Auditorium auditorium, LocalDate date, LocalTime startTime, LocalTime endTime) {
+<span class="nc bnc" id="L42" title="All 10 branches missed.">		if (name != null &amp;&amp; !name.isEmpty() &amp;&amp; auditorium != null &amp;&amp; date != null &amp;&amp; startTime != null</span>
+<span class="nc bnc" id="L43" title="All 4 branches missed.">				&amp;&amp; endTime != null &amp;&amp; isAuditoriumFree(auditorium, date, startTime, endTime)) {</span>
+<span class="nc" id="L44">			Event event = new Event();</span>
+
+<span class="nc" id="L46">			event.setName(name);</span>
+<span class="nc" id="L47">			event.setAuditorium(auditorium);</span>
+<span class="nc" id="L48">			event.setDate(date);</span>
+<span class="nc" id="L49">			event.setStartTime(startTime);</span>
+<span class="nc" id="L50">			event.setEndTime(endTime);</span>
+
+<span class="nc" id="L52">			eventDAO.saveEvent(event);</span>
+
+<span class="nc" id="L54">			return event;</span>
+
+		}
+<span class="nc" id="L57">		return null;</span>
+	}
+
+	/**
+	 * @see jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.EventService#
+	 *      delete(jmp.yury.kiryla.infrastructure_unit_jmock_task05.beans.Event)
+	 */
+	@Override
+	public void delete(Event event) {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">		if (event != null) {</span>
+<span class="nc" id="L67">			eventDAO.removeEvent(event);</span>
+		}
+<span class="nc" id="L69">	}</span>
+
+	/**
+	 * Check if auditorium is free on requested date-time
+	 * 
+	 * @param auditorium
+	 *            {@link Auditorium}
+	 * @param date
+	 *            Date
+	 * @param startTime
+	 *            Start Time
+	 * @param endTime
+	 *            End Time
+	 * @return &lt;code&gt;true&lt;/code&gt; if auditorium available
+	 */
+	private boolean isAuditoriumFree(Auditorium auditorium, LocalDate date, LocalTime startTime, LocalTime endTime) {
+<span class="nc" id="L85">		List&lt;Event&gt; events = eventDAO.getEvents();</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">		if (events != null) {</span>
+<span class="nc" id="L87">			return !events.stream().anyMatch(event -&gt; {</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">				if (event.getDate().isEqual(date)</span>
+<span class="nc bnc" id="L89" title="All 4 branches missed.">						&amp;&amp; (startTime.isAfter(event.getStartTime()) &amp;&amp; startTime.isBefore(event.getEndTime())</span>
+<span class="nc bnc" id="L90" title="All 4 branches missed.">								|| (endTime.isAfter(event.getStartTime()) &amp;&amp; endTime.isBefore(event.getEndTime())))) {</span>
+<span class="nc" id="L91">					return true;</span>
+				}
+<span class="nc" id="L93">				return false;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">			});</span>
+		} else {
+<span class="nc" id="L96">			return true;</span>
+		}
+	}
+
+	/**
+	 * @see jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.EventService#getAll()
+	 */
+	@Override
+	public List&lt;Event&gt; getAll() {
+<span class="nc" id="L105">		return eventDAO.getEvents();</span>
+	}
+
+	/**
+	 * @see jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.EventService#get(long)
+	 */
+	@Override
+	public Event get(long id) {
+<span class="nc" id="L113">		return eventDAO.getEvent(id);</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
