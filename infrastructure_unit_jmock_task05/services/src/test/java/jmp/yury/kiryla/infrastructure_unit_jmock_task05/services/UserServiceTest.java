@@ -15,6 +15,7 @@ import jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.beans.UserServi
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNull;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
@@ -48,7 +49,7 @@ public class UserServiceTest {
      * @throws Exception if any exception occurred
      */
     @Test
-    public void testRegistration() throws Exception {
+    public void testRegistration_Success() throws Exception {
 	String name = "Test";
 	
 	doNothing().when(userDAO).saveUser(any(User.class));
@@ -56,6 +57,19 @@ public class UserServiceTest {
 	User user = userService.register(name);
 	
 	assertEquals(name, user.getName());
+    }
+    
+    /**
+     * Test {@link UserService#register(String)} method
+     * @throws Exception if any exception occurred
+     */
+    @Test
+    public void testRegistration_Fail() throws Exception {
+	String name = "";
+	
+	User user = userService.register(name);
+	
+	assertNull(user);
     }
     
     /**
@@ -78,7 +92,7 @@ public class UserServiceTest {
      * @throws Exception if any exception occurred
      */
     @Test
-    public void testSearchUser() throws Exception {
+    public void testSearchUser_Success() throws Exception {
 	String name = "test";
 	
 	User user = mock(User.class);
@@ -87,5 +101,14 @@ public class UserServiceTest {
 	when(userDAO.getUser(name)).thenReturn(user);
 	
 	assertSame(user, userService.searchUser(name));
+    }
+    
+    /**
+     * Test {@link UserService#searchUser(String)} method
+     * @throws Exception if any exception occurred
+     */
+    @Test
+    public void testSearchUser_Fail() throws Exception {
+	assertNull(userService.searchUser(null));
     }
 }
