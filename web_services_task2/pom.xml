@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>jmp.yury.kiryla</groupId>
+	<artifactId>web_services_task2</artifactId>
+	<version>0.0.1</version>
+	<packaging>pom</packaging>
+	<name>Web-services task 2</name>
+	<description>In this exercise, you will implement your own simple SOAP Web Service and Client with Java.
+
+Please, implement a simple SOAP Web Service that satisfies the following extract of a WSDL declaration.
+
+b) Implement a corresponding client that uses your Web Service to simulate the lottery drawing by requesting six random numbers between 1 and 49.
+	</description>
+	<modules>
+		<module>soap_service</module>
+		<module>soap_client</module>
+	</modules>
+
+	<properties>
+		<java.version>1.7</java.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
