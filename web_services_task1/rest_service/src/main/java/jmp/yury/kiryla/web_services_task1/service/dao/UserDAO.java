@@ -27,13 +27,6 @@ public interface UserDAO {
 	public User getUserById(long id);
 	
 	/**
-	 * Get Users by name
-	 * @param name User's name
-	 * @return {@link User}s list
-	 */
-	public List<User> getUsersByName(String name);
-	
-	/**
 	 * Get All Users
 	 * @return {@link User}s list
 	 */
