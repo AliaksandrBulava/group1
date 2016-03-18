@@ -22,6 +22,12 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.187</version>
 		</dependency>
+		<dependency>
+			<groupId>jmp.yury.kiryla</groupId>
+			<artifactId>rest_common</artifactId>
+			<version>0.0.1</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
