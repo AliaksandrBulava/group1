@@ -30,11 +30,28 @@ public class UserDAOImpl implements UserDAO {
 	private DataSource ds;
 
 	/**
+	 * Constructor
+	 */
+	public UserDAOImpl() {
+		super();
+		try (Connection connection = ds.getConnection(); Statement statement = connection.createStatement(); 
+				ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME='USERS'")){
+			if (rs.next() && rs.getInt(1) == 0) {
+				statement.execute("CREATE TABLE USERS(ID INT AUTO_INCREMENT, FIRST_NAME VARCHAR(50) NOT NULL, "
+						+ "LAST_NAME VARCHAR(50) NOT NULL, LOGIN VARCHAR(50) NOT NULL, EMAIL VARCHAR(50) NOT NULL, PRIMARY KEY (ID), UNIQUE (LOGIN))");
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
 	 * @see jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#create(jmp.yury.kiryla.web_services_task1.beans.User)
 	 */
 	@Override
 	public void create(User user) {
-		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement("", Statement.RETURN_GENERATED_KEYS)){
+		try (Connection con = ds.getConnection(); PreparedStatement ps = 
+				con.prepareStatement("INSERT INTO USERS(FIRST_NAME,LAST_NAME,LOGIN,EMAIL) VALUES ?,?,?,?", Statement.RETURN_GENERATED_KEYS)){
 			ps.setString(1, user.getFirstName());
 			ps.setString(2, user.getLastName());
 			ps.setString(3, user.getLogin());
@@ -48,17 +65,33 @@ public class UserDAOImpl implements UserDAO {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#getUserById(long)
 	 */
 	@Override
 	public User getUserById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+		try (Connection con = ds.getConnection(); 
+				PreparedStatement ps = con.prepareStatement("SELECT FIRST_NAME,LAST_NAME,LOGIN,EMAIL FROM USERS WHERE ID=?")){
+			ps.setLong(1, id);
+			try(ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					user = new User();
+					user.setId(id);
+					user.setFirstName(rs.getString("FIRST_NAME"));
+					user.setLastName(rs.getString("LAST_NAME"));
+					user.setLogin(rs.getString("LOGIN"));
+					user.setEmail(rs.getString("EMAIL"));
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return user;
 	}
 
 	/* (non-Javadoc)
