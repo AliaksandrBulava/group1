@@ -3,6 +3,7 @@
  */
 package jmp.yury.kiryla.web_services_task1.service.dao;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import jmp.yury.kiryla.web_services_task1.beans.User;
@@ -27,7 +29,6 @@ public class UserDAOImpl implements UserDAO {
     /**
      * {@link DataSource}
      */
-    @Resource(name = "jdbc/rest_db")
     private DataSource ds;
 
     /**
@@ -35,10 +36,16 @@ public class UserDAOImpl implements UserDAO {
      */
     public UserDAOImpl() {
 	super();
+	try {
+	    InitialContext ic = new InitialContext();
+	    ds = (DataSource) ic.lookup("java:comp/env/jdbc/rest_db");
+	} catch (NamingException e1) {
+	    throw new RuntimeException(e1);
+	}
 	try (Connection connection = ds.getConnection();
 		PreparedStatement ps = connection.prepareStatement(
 			"CREATE TABLE IF NOT EXISTS USERS(ID INT AUTO_INCREMENT, FIRST_NAME VARCHAR(50) NOT NULL, "
-				+ "LAST_NAME VARCHAR(50) NOT NULL, LOGIN VARCHAR(50) NOT NULL, EMAIL VARCHAR(50) NOT NULL, PRIMARY KEY (ID), UNIQUE (LOGIN))")) {
+				+ "LAST_NAME VARCHAR(50) NOT NULL, LOGIN VARCHAR(50) NOT NULL, EMAIL VARCHAR(50) NOT NULL, LOGO BLOB, PRIMARY KEY (ID), UNIQUE (LOGIN))")) {
 	    ps.execute();
 	} catch (SQLException e) {
 	    throw new RuntimeException(e);
@@ -52,7 +59,7 @@ public class UserDAOImpl implements UserDAO {
     public void create(User user) {
 	try (Connection con = ds.getConnection();
 		PreparedStatement ps = con.prepareStatement(
-			"INSERT INTO USERS(FIRST_NAME,LAST_NAME,LOGIN,EMAIL) VALUES ?,?,?,?",
+			"INSERT INTO USERS(FIRST_NAME,LAST_NAME,LOGIN,EMAIL) VALUES (?,?,?,?)",
 			Statement.RETURN_GENERATED_KEYS)) {
 	    ps.setString(1, user.getFirstName());
 	    ps.setString(2, user.getLastName());
@@ -160,4 +167,37 @@ public class UserDAOImpl implements UserDAO {
 	}
     }
 
+    /**
+     * @see jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#addLogo(java.io.InputStream, jmp.yury.kiryla.web_services_task1.beans.User)
+     */
+    @Override
+    public void addLogo(InputStream is, User user) {
+	try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement("UPDATE USERS SET LOGO=? WHERE ID=?")){
+	    ps.setBlob(1, is);
+	    ps.setLong(2, user.getId());
+	    ps.execute();
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
+	}
+    }
+
+    /**
+     * @see jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#getLogo(jmp.yury.kiryla.web_services_task1.beans.User)
+     */
+    @Override
+    public InputStream getLogo(User user) {
+	try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement("SELECT LOGO FROM USERS WHERE ID=?")){
+	    ps.setLong(1, user.getId());
+	    try (ResultSet rs = ps.executeQuery()) {
+		if (rs.next()) {
+		    return rs.getBinaryStream("LOGO");
+		}
+	    }
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
+	}
+	return null;
+    }
+
+    
 }
