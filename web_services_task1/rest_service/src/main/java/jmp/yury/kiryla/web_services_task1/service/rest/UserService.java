@@ -4,6 +4,7 @@
 package jmp.yury.kiryla.web_services_task1.service.rest;
 
 import java.io.InputStream;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.sun.jersey.api.MessageException;
 import com.sun.jersey.api.NotFoundException;
@@ -23,7 +25,7 @@ import com.sun.jersey.multipart.FormDataParam;
 
 import jmp.yury.kiryla.web_services_task1.beans.User;
 import jmp.yury.kiryla.web_services_task1.service.dao.UserDAO;
-import jmp.yury.kiryla.web_services_task1.service.dao.UserDAOImpl;
+import jmp.yury.kiryla.web_services_task1.service.dao.UserDAOBean;
 
 /**
  * REST User Service
@@ -36,7 +38,7 @@ public class UserService {
     /**
      * {@link UserDAO}
      */
-    private UserDAO userDAO = new UserDAOImpl();
+    private UserDAO userDAO = new UserDAOBean();
 
     @GET
     @Path("/{id}")
@@ -86,16 +88,35 @@ public class UserService {
 	}
 	throw new NotFoundException("There are not user with id=" + id);
     }
-    
+
     @POST
     @Path("/logo")
-    @Consumes({MediaType.MULTIPART_FORM_DATA})
-    public String uploadLogo(@FormDataParam("file") InputStream fileIS, @FormDataParam("file") FormDataContentDisposition disposition, @QueryParam(value = "id") long id){
+    @Consumes({ MediaType.MULTIPART_FORM_DATA })
+    public String uploadLogo(@FormDataParam("file") InputStream fileIS,
+	    @FormDataParam("file") FormDataContentDisposition disposition, @FormDataParam("id") long id) {
 	User user = userDAO.getUserById(id);
 	if (user != null) {
-	    userDAO.addLogo(fileIS, user);
+	    userDAO.addLogo(fileIS, disposition.getFileName(), user);
 	    return "File " + disposition.getFileName() + " uploaded";
 	}
 	throw new NotFoundException("There are not user with id=" + id);
+    }
+
+    @GET
+    @Path("/logo")
+    public Response downloadLogo(@QueryParam(value = "id") long id) {
+	User user = userDAO.getUserById(id);
+	if (user != null) {
+	    Map.Entry<String, InputStream> logo = userDAO.getLogo(user);
+	    if (logo != null) {
+		return Response.ok(logo.getValue(), MediaType.APPLICATION_OCTET_STREAM)
+			.header("content-disposition", "attachment; filename = " + logo.getKey()).build();
+	    } else {
+		throw new NotFoundException(
+			"There are not logo for user " + user.getFirstName() + " " + user.getLastName());
+	    }
+	} else {
+	    throw new NotFoundException("There are not user with id=" + id);
+	}
     }
 }

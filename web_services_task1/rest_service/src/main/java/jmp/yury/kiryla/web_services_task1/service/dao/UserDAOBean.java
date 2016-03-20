@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -24,7 +26,7 @@ import jmp.yury.kiryla.web_services_task1.beans.User;
  * @author Yury_Kiryla
  *
  */
-public class UserDAOImpl implements UserDAO {
+public class UserDAOBean implements UserDAO {
 
     /**
      * {@link DataSource}
@@ -34,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
     /**
      * Constructor
      */
-    public UserDAOImpl() {
+    public UserDAOBean() {
 	super();
 	try {
 	    InitialContext ic = new InitialContext();
@@ -45,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
 	try (Connection connection = ds.getConnection();
 		PreparedStatement ps = connection.prepareStatement(
 			"CREATE TABLE IF NOT EXISTS USERS(ID INT AUTO_INCREMENT, FIRST_NAME VARCHAR(50) NOT NULL, "
-				+ "LAST_NAME VARCHAR(50) NOT NULL, LOGIN VARCHAR(50) NOT NULL, EMAIL VARCHAR(50) NOT NULL, LOGO BLOB, PRIMARY KEY (ID), UNIQUE (LOGIN))")) {
+				+ "LAST_NAME VARCHAR(50) NOT NULL, LOGIN VARCHAR(50) NOT NULL, EMAIL VARCHAR(50) NOT NULL, LOGO BLOB, FILENAME VARCHAR(150), PRIMARY KEY (ID), UNIQUE (LOGIN))")) {
 	    ps.execute();
 	} catch (SQLException e) {
 	    throw new RuntimeException(e);
@@ -151,10 +153,9 @@ public class UserDAOImpl implements UserDAO {
 
     }
 
-    /** 
-     * @see
-     * jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#delete(jmp.yury.
-     * kiryla.web_services_task1.beans.User)
+    /**
+     * @see jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#delete(jmp.yury.
+     *      kiryla.web_services_task1.beans.User)
      */
     @Override
     public void delete(User user) {
@@ -168,13 +169,16 @@ public class UserDAOImpl implements UserDAO {
     }
 
     /**
-     * @see jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#addLogo(java.io.InputStream, jmp.yury.kiryla.web_services_task1.beans.User)
+     * @see jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#addLogo(java.io.InputStream,
+     *      jmp.yury.kiryla.web_services_task1.beans.User)
      */
     @Override
-    public void addLogo(InputStream is, User user) {
-	try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement("UPDATE USERS SET LOGO=? WHERE ID=?")){
+    public void addLogo(InputStream is, String filename, User user) {
+	try (Connection con = ds.getConnection();
+		PreparedStatement ps = con.prepareStatement("UPDATE USERS SET LOGO=?,FILENAME=? WHERE ID=?")) {
 	    ps.setBlob(1, is);
-	    ps.setLong(2, user.getId());
+	    ps.setString(2, filename);
+	    ps.setLong(3, user.getId());
 	    ps.execute();
 	} catch (SQLException e) {
 	    throw new RuntimeException(e);
@@ -185,12 +189,14 @@ public class UserDAOImpl implements UserDAO {
      * @see jmp.yury.kiryla.web_services_task1.service.dao.UserDAO#getLogo(jmp.yury.kiryla.web_services_task1.beans.User)
      */
     @Override
-    public InputStream getLogo(User user) {
-	try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement("SELECT LOGO FROM USERS WHERE ID=?")){
+    public Map.Entry<String, InputStream> getLogo(User user) {
+	try (Connection con = ds.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT LOGO,FILENAME FROM USERS WHERE ID=?")) {
 	    ps.setLong(1, user.getId());
 	    try (ResultSet rs = ps.executeQuery()) {
 		if (rs.next()) {
-		    return rs.getBinaryStream("LOGO");
+		    return new AbstractMap.SimpleEntry<String, InputStream>(rs.getString("FILENAME"),
+			    rs.getBinaryStream("LOGO"));
 		}
 	    }
 	} catch (SQLException e) {
@@ -199,5 +205,4 @@ public class UserDAOImpl implements UserDAO {
 	return null;
     }
 
-    
 }

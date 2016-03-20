@@ -5,6 +5,7 @@ package jmp.yury.kiryla.web_services_task1.service.dao;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import jmp.yury.kiryla.web_services_task1.beans.User;
 
@@ -48,14 +49,15 @@ public interface UserDAO {
 	/**
 	 * Add logo to user
 	 * @param is {@link InputStream} object
+	 * @param filename File name
 	 * @param user {@link User} object
 	 */
-	public void addLogo(InputStream is, User user);
+	public void addLogo(InputStream is, String filename, User user);
 	
 	/**
 	 * Get logo for user
 	 * @param user {@link User} object
-	 * @return {@link InputStream} object for logo
+	 * @return Filename/InputStream objects
 	 */
-	public InputStream getLogo(User user);
+	public Map.Entry<String, InputStream> getLogo(User user);
 }

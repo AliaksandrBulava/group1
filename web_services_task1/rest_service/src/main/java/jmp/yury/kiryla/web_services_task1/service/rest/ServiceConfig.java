@@ -27,5 +27,5 @@ public class ServiceConfig extends Application {
 	set.add(UserService.class);
 	return set;
     }
-    
+
 }
