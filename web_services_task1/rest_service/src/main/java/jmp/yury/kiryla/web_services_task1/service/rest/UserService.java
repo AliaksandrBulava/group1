@@ -40,6 +40,11 @@ public class UserService {
      */
     private UserDAO userDAO = new UserDAOBean();
 
+    /**
+     * Get user by id
+     * @param id ID value
+     * @return {@link User} object
+     */
     @GET
     @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON })
@@ -51,6 +56,11 @@ public class UserService {
 	return user;
     }
 
+    /**
+     * Create new User. Support only XML format
+     * @param user the {@link User} object
+     * @return {@link User} object
+     */
     @POST
     @Path("/new")
     @Consumes({ MediaType.APPLICATION_XML })
@@ -64,6 +74,11 @@ public class UserService {
 	return user;
     }
 
+    /**
+     * Update existed User. Support only JSON format
+     * @param user the {@link User} object
+     * @return User
+     */
     @PUT
     @Path("/update")
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -77,6 +92,11 @@ public class UserService {
 	return user;
     }
 
+    /**
+     * Delete user
+     * @param id User ID
+     * @return deleted {@link User} object
+     */
     @DELETE
     @Path("/delete")
     @Produces({ MediaType.TEXT_PLAIN })
@@ -89,6 +109,13 @@ public class UserService {
 	throw new NotFoundException("There are not user with id=" + id);
     }
 
+    /**
+     * Upload logo file
+     * @param fileIS File {@link InputStream}
+     * @param disposition File {@link FormDataContentDisposition}
+     * @param id User ID
+     * @return String result
+     */
     @POST
     @Path("/logo")
     @Consumes({ MediaType.MULTIPART_FORM_DATA })
@@ -102,6 +129,11 @@ public class UserService {
 	throw new NotFoundException("There are not user with id=" + id);
     }
 
+    /**
+     * Download logo for specific user
+     * @param id User ID
+     * @return {@link Response} object, which contains logo file
+     */
     @GET
     @Path("/logo")
     public Response downloadLogo(@QueryParam(value = "id") long id) {

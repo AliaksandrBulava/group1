@@ -10,6 +10,41 @@
 		<version>0.0.1</version>
 	</parent>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.19.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-bundle</artifactId>
+			<version>1.19.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>1.19.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jmp.yury.kiryla</groupId>
+			<artifactId>rest_common</artifactId>
+			<version>0.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+	</dependencies>
+
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
