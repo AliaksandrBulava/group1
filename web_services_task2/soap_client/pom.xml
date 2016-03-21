@@ -27,7 +27,8 @@
 							<transformers>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>jmp.yury.kiryla.web_services_task2.client.App</mainClass>
+									<mainClass>jmp.yury.kiryla.web_services_task2.client.App
+									</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
