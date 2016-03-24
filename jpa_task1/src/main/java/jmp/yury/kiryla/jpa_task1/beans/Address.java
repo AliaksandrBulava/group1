@@ -1,11 +1,14 @@
 package jmp.yury.kiryla.jpa_task1.beans;
 
+import javax.persistence.Embeddable;
+
 /**
  * Employee home address
  * 
  * @author Yury_Kiryla
  *
  */
+@Embeddable
 public class Address {
 
 	/**

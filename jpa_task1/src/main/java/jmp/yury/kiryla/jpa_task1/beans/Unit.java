@@ -5,17 +5,23 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 /**
  * Unit
  * 
  * @author Yury_Kiryla
  *
  */
+@Entity
 public class Unit {
 	
 	/**
 	 * ID
 	 */
+	@Id
 	private long id;
 	
 	/**
@@ -26,6 +32,7 @@ public class Unit {
 	/**
 	 * {@link Employee}s
 	 */
+	@OneToMany
 	private List<Employee> employees;
 
 	/**

@@ -5,17 +5,23 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 /**
  * Project
  * 
  * @author Yury_Kiryla
  *
  */
+@Entity
 public class Project {
 	
 	/**
 	 * ID
 	 */
+	@Id
 	private long id;
 
 	/**
@@ -31,6 +37,7 @@ public class Project {
 	/**
 	 * {@link Employee}s assigned to the project
 	 */
+	@ManyToMany(mappedBy="projects")
 	private List<Employee> employees;
 
 	/**

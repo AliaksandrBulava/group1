@@ -4,6 +4,11 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="jpa_task1">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>jmp.yury.kiryla.jpa_task1.beans.Employee</class>
+		<class>jmp.yury.kiryla.jpa_task1.beans.Address</class>
+		<class>jmp.yury.kiryla.jpa_task1.beans.EmployeePersonalInfo</class>
+		<class>jmp.yury.kiryla.jpa_task1.beans.Unit</class>
+		<class>jmp.yury.kiryla.jpa_task1.beans.Project</class>
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action"
 				value="drop-and-create" />

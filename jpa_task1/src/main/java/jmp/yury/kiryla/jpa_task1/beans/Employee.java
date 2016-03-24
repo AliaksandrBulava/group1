@@ -5,37 +5,62 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.List;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 /**
  * Employee
  * 
  * @author Yury_Kiryla
  *
  */
+@Entity
 public class Employee {
 	/**
 	 * ID
 	 */
+	@Id
 	private long id;
 	
 	/**
 	 * employee {@link Address}
 	 */
+	@Embedded
 	private Address address;
 	
 	/**
 	 * Employee Personal Info
 	 * {@link EmployeePersonalInfo}
 	 */
+	@OneToOne
+	@JoinColumn
 	private EmployeePersonalInfo personalInfo;
+	
+	/**
+	 * {@link EmployeeStatus}
+	 */
+	@Enumerated(EnumType.STRING)
+	private EmployeeStatus status;
 	
 	/**
 	 * The Employee's {@link Project}s
 	 */
+	@ManyToMany
+	@JoinTable(name="emploee_project", joinColumns=@JoinColumn(name="emploee_id"), inverseJoinColumns = @JoinColumn(name="project_id"))
 	private List<Project> projects;
 	
 	/**
 	 * {@link Employee}'s {@link Unit}
 	 */
+	@ManyToOne
 	private Unit unit;
 
 	/**
@@ -106,5 +131,19 @@ public class Employee {
 	 */
 	public void setUnit(Unit unit) {
 		this.unit = unit;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public EmployeeStatus getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(EmployeeStatus status) {
+		this.status = status;
 	}
 }

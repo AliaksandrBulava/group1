@@ -5,17 +5,25 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
  * Employee Personal Info
  * 
  * @author Yury_Kiryla
  *
  */
+@Entity
 public class EmployeePersonalInfo {
 
 	/**
 	 * ID
 	 */
+	@Id
 	private long id;
 
 	/**
@@ -31,7 +39,14 @@ public class EmployeePersonalInfo {
 	/**
 	 * Birthday
 	 */
+	@Temporal(TemporalType.DATE)
 	private Date birthday;
+	
+	/**
+	 * {@link Employee}
+	 */
+	@OneToOne()
+	private Employee employee;
 
 	/**
 	 * @return the id
