@@ -10,6 +10,6 @@ package jmp.yury.kiryla.jpa_task1.beans;
  *
  */
 public enum EmployeeStatus {
-	FULL_TIME,PART_TIME,TEMPORARY,CONTRACTOR
+	FULL_TIME,PART_TIME,TEMPORARY,CONTRACTOR,NEW
 
 }

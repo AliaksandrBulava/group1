@@ -5,6 +5,7 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -44,7 +45,7 @@ public class Employee {
 	 * Employee Personal Info
 	 * {@link EmployeePersonalInfo}
 	 */
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="persinfo_id", nullable=false)
 	private EmployeePersonalInfo personalInfo;
 	
@@ -59,7 +60,7 @@ public class Employee {
 	 * The Employee's {@link Project}s
 	 */
 	@ManyToMany
-	@JoinTable(name="emploee_project", joinColumns=@JoinColumn(name="emploee_id"), inverseJoinColumns = @JoinColumn(name="project_id"))
+	@JoinTable(name="emploee_project", schema="s_jpa", joinColumns=@JoinColumn(name="emploee_id"), inverseJoinColumns = @JoinColumn(name="project_id"))
 	private List<Project> projects;
 	
 	/**

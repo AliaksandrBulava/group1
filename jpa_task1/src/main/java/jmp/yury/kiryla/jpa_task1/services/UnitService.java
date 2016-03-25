@@ -4,6 +4,7 @@
 package jmp.yury.kiryla.jpa_task1.services;
 
 import jmp.yury.kiryla.jpa_task1.beans.Employee;
+import jmp.yury.kiryla.jpa_task1.beans.EmployeeStatus;
 import jmp.yury.kiryla.jpa_task1.beans.Unit;
 
 /**
@@ -44,6 +45,7 @@ public interface UnitService {
 	 * Add {@link Employee} to {@link Unit} by id’s
 	 * @param unitId Unit's ID
 	 * @param employeeId Employee's ID
+	 * @param employeeStatus Status of Employee in Unit
 	 */
-	public void addEmployee(long unitId, long employeeId);
+	public void addEmployee(long unitId, long employeeId, EmployeeStatus employeeStatus);
 }

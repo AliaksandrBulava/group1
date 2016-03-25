@@ -5,10 +5,12 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -54,7 +56,7 @@ public class EmployeePersonalInfo {
 	 * {@link Employee}
 	 */
 	@OneToOne(mappedBy="personalInfo")
-	@Column(name="employee_id", nullable=false)
+	@JoinColumn(name="employee_id", nullable=false)
 	private Employee employee;
 
 	/**
