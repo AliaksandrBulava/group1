@@ -5,9 +5,12 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,34 +21,40 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
+@Table(name="t_persinfo", schema="s_jpa")
 public class EmployeePersonalInfo {
 
 	/**
 	 * ID
 	 */
 	@Id
+	@GeneratedValue
 	private long id;
 
 	/**
 	 * First Name
 	 */
+	@Column(name="first_name", nullable=false)
 	private String firstName;
 
 	/**
 	 * Last Name
 	 */
+	@Column(name="last_name", nullable=false)
 	private String lastName;
 
 	/**
 	 * Birthday
 	 */
 	@Temporal(TemporalType.DATE)
+	@Column(name="birthday", nullable=false)
 	private Date birthday;
 	
 	/**
 	 * {@link Employee}
 	 */
-	@OneToOne()
+	@OneToOne(mappedBy="personalInfo")
+	@Column(name="employee_id", nullable=false)
 	private Employee employee;
 
 	/**

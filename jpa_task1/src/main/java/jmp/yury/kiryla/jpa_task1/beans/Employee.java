@@ -5,16 +5,18 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Employee
@@ -23,11 +25,13 @@ import javax.persistence.OneToOne;
  *
  */
 @Entity
+@Table(name="t_employee", schema="s_jpa")
 public class Employee {
 	/**
 	 * ID
 	 */
 	@Id
+	@GeneratedValue
 	private long id;
 	
 	/**
@@ -41,13 +45,14 @@ public class Employee {
 	 * {@link EmployeePersonalInfo}
 	 */
 	@OneToOne
-	@JoinColumn
+	@JoinColumn(name="persinfo_id", nullable=false)
 	private EmployeePersonalInfo personalInfo;
 	
 	/**
 	 * {@link EmployeeStatus}
 	 */
 	@Enumerated(EnumType.STRING)
+	@Column(name="status", nullable=false)
 	private EmployeeStatus status;
 	
 	/**
@@ -60,7 +65,6 @@ public class Employee {
 	/**
 	 * {@link Employee}'s {@link Unit}
 	 */
-	@ManyToOne
 	private Unit unit;
 
 	/**

@@ -1,5 +1,6 @@
 package jmp.yury.kiryla.jpa_task1.beans;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -14,26 +15,31 @@ public class Address {
 	/**
 	 * Country
 	 */
+	@Column(name="a_country", nullable=false)
 	private String country;
 
 	/**
 	 * State
 	 */
+	@Column(name="a_state")
 	private String state;
 
 	/**
 	 * City
 	 */
+	@Column(name="a_city", nullable=false)
 	private String city;
 
 	/**
 	 * Street
 	 */
+	@Column(name="a_street")
 	private String street;
 
 	/**
 	 * Home
 	 */
+	@Column(name="a_home")
 	private String home;
 
 	/**
