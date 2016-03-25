@@ -70,6 +70,8 @@ public class App {
 		
 		
 		// Test User Service
+		
+		System.out.println("Test Employee create");
 		Address address = new Address();
 		address.setCountry("Belarus");
 		address.setCity("Gomel");
@@ -83,7 +85,13 @@ public class App {
 		
 		Employee employee = employeeService.create(personalInfo, address);
 		
-		System.out.println(employee.getPersonalInfo().getFirstName() + " created");
+		System.out.println("Employee: " + employee.getPersonalInfo().getFirstName() + " created");
+		System.out.println();
+		
+		
+		System.out.println("Test find employee");
+		
+		
 	}
 
 }

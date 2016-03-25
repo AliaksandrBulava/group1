@@ -55,30 +55,39 @@ public class EmployeeServiceBean implements EmployeeService {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see jmp.yury.kiryla.jpa_task1.services.EmployeeService#find(long)
 	 */
 	@Override
 	public Employee find(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(Employee.class, id);
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see jmp.yury.kiryla.jpa_task1.services.EmployeeService#delete(long)
 	 */
 	@Override
 	public Employee delete(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Employee employee = find(id);
+		if (employee != null) {
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			em.remove(employee);
+			tx.commit();
+		}
+		return employee;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see jmp.yury.kiryla.jpa_task1.services.EmployeeService#update(jmp.yury.kiryla.jpa_task1.beans.Employee)
 	 */
 	@Override
 	public void update(Employee employee) {
-		// TODO Auto-generated method stub
-		
+		if (employee != null) {
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			em.refresh(employee);
+			tx.commit();
+		}
 	}
 }

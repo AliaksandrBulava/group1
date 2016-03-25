@@ -5,7 +5,6 @@ package jmp.yury.kiryla.jpa_task1.beans;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
