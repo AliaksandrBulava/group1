@@ -19,6 +19,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Employee
  * 
@@ -151,4 +153,42 @@ public class Employee {
 	public void setStatus(EmployeeStatus status) {
 		this.status = status;
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+	    StringBuilder sb = new StringBuilder("employee:");
+	    if (personalInfo != null) {
+		sb.append(personalInfo.getFirstName() + " " + personalInfo.getLastName());
+		sb.append("Birthday: " + personalInfo.getBirthday());
+	    }
+	    
+	    if (address != null) {
+		sb.append("Address: ");
+		sb.append(address.getCountry() + ", ");
+		if (StringUtils.isNotBlank(address.getState())) {
+		    sb.append(address.getState() + ", ");
+		}
+		sb.append(address.getCity());
+		if (StringUtils.isNoneBlank(address.getStreet(), address.getHome())) {
+		    sb.append(", " + address.getStreet() + ", " + address.getHome());
+		}
+		sb.append("Status: " + status);
+		if (projects != null && !projects.isEmpty()) {
+		    sb.append("Projects:");
+		    for (Project project : projects) {
+			sb.append(project.getName());
+		    }
+		}
+		if (unit != null) {
+		    sb.append("Unit: " + unit.getName());
+		}
+	    }
+	    
+	    return sb.toString();
+	}
+	
+	
 }
