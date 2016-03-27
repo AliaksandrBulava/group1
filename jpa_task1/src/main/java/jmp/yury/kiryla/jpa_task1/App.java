@@ -4,6 +4,7 @@
 package jmp.yury.kiryla.jpa_task1;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +13,7 @@ import javax.persistence.Persistence;
 import jmp.yury.kiryla.jpa_task1.beans.Address;
 import jmp.yury.kiryla.jpa_task1.beans.Employee;
 import jmp.yury.kiryla.jpa_task1.beans.EmployeePersonalInfo;
+import jmp.yury.kiryla.jpa_task1.beans.EmployeeStatus;
 import jmp.yury.kiryla.jpa_task1.services.EmployeeService;
 import jmp.yury.kiryla.jpa_task1.services.beans.EmployeeServiceBean;
 
@@ -84,8 +86,24 @@ public class App {
 	System.out.println(employee);
 	System.out.println();
 
-	System.out.println("Test find employee");
+	long employeeId = employee.getId();
+	employee = null;
 
+	System.out.println("Test find employee:");
+	employee = employeeService.find(employeeId);
+	System.out.println("Employee was found:");
+	System.out.println(employee);
+	System.out.println();
+	
+	System.out.println("Test update employee");
+	employee.setStatus(EmployeeStatus.TEMPORARY);
+	employee.getAddress().setCity("Minsk");
+	employee.getPersonalInfo().setBirthday(new GregorianCalendar(1950, 5, 10).getTime());
+	employeeService.update(employee);
+	employee = null;
+	employee = employeeService.find(employeeId);
+	System.out.println("Updated employee:");
+	System.out.println(employee);
+	System.out.println();
     }
-
 }

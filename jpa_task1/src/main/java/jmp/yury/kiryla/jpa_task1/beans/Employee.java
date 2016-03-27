@@ -3,6 +3,7 @@
  */
 package jmp.yury.kiryla.jpa_task1.beans;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -69,6 +70,11 @@ public class Employee {
 	 * {@link Employee}'s {@link Unit}
 	 */
 	private Unit unit;
+	
+	/**
+	 * Date formatter
+	 */
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * @return the id
@@ -160,30 +166,31 @@ public class Employee {
 	@Override
 	public String toString() {
 	    StringBuilder sb = new StringBuilder("employee:");
+	    sb.append("\n\tid:\t\t" + id);
 	    if (personalInfo != null) {
-		sb.append(personalInfo.getFirstName() + " " + personalInfo.getLastName());
-		sb.append("Birthday: " + personalInfo.getBirthday());
+		sb.append("\n\tname:\t\t" + personalInfo.getFirstName() + " " + personalInfo.getLastName());
+		sb.append("\n\tbirthday:\t" + DATE_FORMATTER.format(personalInfo.getBirthday()));
 	    }
 	    
 	    if (address != null) {
-		sb.append("Address: ");
+		sb.append("\n\taddress:\t");
 		sb.append(address.getCountry() + ", ");
 		if (StringUtils.isNotBlank(address.getState())) {
 		    sb.append(address.getState() + ", ");
 		}
 		sb.append(address.getCity());
 		if (StringUtils.isNoneBlank(address.getStreet(), address.getHome())) {
-		    sb.append(", " + address.getStreet() + ", " + address.getHome());
+		    sb.append(", " + address.getStreet() + " " + address.getHome());
 		}
-		sb.append("Status: " + status);
+		sb.append("\n\tstatus:\t\t" + status);
 		if (projects != null && !projects.isEmpty()) {
-		    sb.append("Projects:");
+		    sb.append("\n\tprojects:");
 		    for (Project project : projects) {
-			sb.append(project.getName());
+			sb.append("\n\t\t" + project.getName());
 		    }
 		}
 		if (unit != null) {
-		    sb.append("Unit: " + unit.getName());
+		    sb.append("\n\tunit:\t" + unit.getName());
 		}
 	    }
 	    
