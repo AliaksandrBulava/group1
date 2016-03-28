@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Project
  * 
@@ -19,9 +21,9 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="t_project", schema="s_jpa")
+@Table(name = "t_project", schema = "s_jpa")
 public class Project {
-	
+
 	/**
 	 * ID
 	 */
@@ -32,19 +34,19 @@ public class Project {
 	/**
 	 * Project Name
 	 */
-	@Column(name="name", nullable=false, unique=true)
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
-	
+
 	/**
 	 * Project Description
 	 */
-	@Column(name="description", length=2000)
+	@Column(name = "description", length = 2000)
 	private String description;
-	
+
 	/**
 	 * {@link Employee}s assigned to the project
 	 */
-	@ManyToMany(mappedBy="projects")
+	@ManyToMany(mappedBy = "projects")
 	private List<Employee> employees;
 
 	/**
@@ -55,7 +57,8 @@ public class Project {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(long id) {
 		this.id = id;
@@ -69,7 +72,8 @@ public class Project {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -83,7 +87,8 @@ public class Project {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -97,9 +102,34 @@ public class Project {
 	}
 
 	/**
-	 * @param employees the employees to set
+	 * @param employees
+	 *            the employees to set
 	 */
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("project:");
+
+		sb.append("\n\tid:\t\t" + id);
+		sb.append("\n\tname:\t\t" + name);
+		if (StringUtils.isNotBlank(description)) {
+			sb.append("\n\tdescription:\t" + description);
+		}
+		if (employees != null && !employees.isEmpty()) {
+			sb.append("\n\temployees:");
+			for (Employee employee : employees) {
+				sb.append("\n\t\t" + employee.getPersonalInfo().getFirstName() + " "
+						+ employee.getPersonalInfo().getLastName());
+			}
+		}
+
+		return sb.toString();
+	}
+
 }
