@@ -3,7 +3,6 @@
  */
 package jmp.yury.kiryla.jpa_task1.services.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -90,17 +89,9 @@ public class ProjectServiceBean implements ProjectService {
 		Employee employee = em.find(Employee.class, employeeId);
 		if (project != null && employee != null) {
 			List<Project> projects = employee.getProjects();
-			if (projects == null) {
-				projects = new ArrayList<>();
-				employee.setProjects(projects);
-			}
 			projects.add(project);
 
 			List<Employee> employees = project.getEmployees();
-			if (employees == null) {
-				employees = new ArrayList<>();
-				project.setEmployees(employees);
-			}
 			employees.add(employee);
 		}
 	}

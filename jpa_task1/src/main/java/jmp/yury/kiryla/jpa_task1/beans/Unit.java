@@ -20,27 +20,27 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="t_unit", schema="s_jpa")
+@Table(name = "t_unit", schema = "s_jpa")
 public class Unit {
-	
+
 	/**
 	 * ID
 	 */
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	/**
 	 * Name
 	 */
-	@Column(name="name", nullable=false, unique=true)
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
-	
+
 	/**
 	 * {@link Employee}s
 	 */
 	@OneToMany
-	@JoinColumn(name="unit_id")
+	@JoinColumn(name = "unit_id")
 	private List<Employee> employees;
 
 	/**
@@ -51,7 +51,8 @@ public class Unit {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(long id) {
 		this.id = id;
@@ -65,7 +66,8 @@ public class Unit {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -79,10 +81,31 @@ public class Unit {
 	}
 
 	/**
-	 * @param employees the employees to set
+	 * @param employees
+	 *            the employees to set
 	 */
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("unit:");
+		
+		sb.append("\n\tid:\t" + id);
+		sb.append("\n\tname:\t" + name);
+		
+		if (employees != null && !employees.isEmpty()) {
+			sb.append("\n\temployees:");
+			for (Employee employee : employees) {
+				sb.append("\n\t\t" + employee.getPersonalInfo().getFirstName() + " " + employee.getPersonalInfo().getLastName());
+			}
+		}
+		
+		return sb.toString();
 	}
 
 }

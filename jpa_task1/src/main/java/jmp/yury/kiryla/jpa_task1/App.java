@@ -15,10 +15,13 @@ import jmp.yury.kiryla.jpa_task1.beans.Employee;
 import jmp.yury.kiryla.jpa_task1.beans.EmployeePersonalInfo;
 import jmp.yury.kiryla.jpa_task1.beans.EmployeeStatus;
 import jmp.yury.kiryla.jpa_task1.beans.Project;
+import jmp.yury.kiryla.jpa_task1.beans.Unit;
 import jmp.yury.kiryla.jpa_task1.services.EmployeeService;
 import jmp.yury.kiryla.jpa_task1.services.ProjectService;
+import jmp.yury.kiryla.jpa_task1.services.UnitService;
 import jmp.yury.kiryla.jpa_task1.services.beans.EmployeeServiceBean;
 import jmp.yury.kiryla.jpa_task1.services.beans.ProjectServiceBean;
+import jmp.yury.kiryla.jpa_task1.services.beans.UnitServiceBean;
 
 /**
  * Main class for application
@@ -37,6 +40,11 @@ public class App {
 	 * {@link ProjectService}
 	 */
 	private ProjectService projectService;
+	
+	/**
+	 * {@link UnitService}
+	 */
+	private UnitService unitService;
 
 	/**
 	 * 
@@ -45,6 +53,7 @@ public class App {
 		super();
 		employeeService = new EmployeeServiceBean(em);
 		projectService = new ProjectServiceBean(em);
+		unitService = new UnitServiceBean(em);
 	}
 
 	/**
@@ -147,5 +156,35 @@ public class App {
 		System.out.println();
 		
 		//Test Unit Service
+		System.out.println("Create Unit");
+		Unit unit = unitService.create("TestUnit");
+		System.out.println("Created Unit:");
+		System.out.println(unit);
+		System.out.println();
+		
+		System.out.println("Update Unit");
+		unit.setName("NewName");
+		System.out.println("Updated Unit:");
+		unit = unitService.find(unit.getId());
+		System.out.println(unit);
+		System.out.println();
+		
+		System.out.println("Add Employee to Unit");
+		unitService.addEmployee(unit.getId(), employee.getId(), EmployeeStatus.FULL_TIME);
+		System.out.println("Updated Unit:");
+		unit = unitService.find(unit.getId());
+		System.out.println(unit);
+		System.out.println("Updated employee:");
+		employee = employeeService.find(employee.getId());
+		System.out.println(employee);
+		System.out.println();
+		
+		System.out.println("Delete Unit");
+		unit = unitService.delete(unit.getId());
+		System.out.println("Deleted Unit:");
+		System.out.println(unit);
+		System.out.println("Find Unit:");
+		System.out.println(unitService.find(unit.getId()));
+		System.out.println();
 	}
 }
