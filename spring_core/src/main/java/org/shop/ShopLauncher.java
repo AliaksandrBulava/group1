@@ -1,5 +1,7 @@
 package org.shop;
 
+import org.shop.data.Item;
+import org.shop.repository.ItemRepository;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,7 +17,9 @@ public class ShopLauncher {
      */
     public static void main(String[] args) {
         try (ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring-context.xml")) {
-        	System.out.println(ctx.getDisplayName());
+        	
+        	ItemRepository itemRepository = ctx.getBean("itemRepository", ItemRepository.class);
+        	System.out.println(itemRepository.createItem(new Item()));
         }
     }
 }
