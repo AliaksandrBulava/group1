@@ -1,5 +1,7 @@
 package org.shop;
 
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * The ShopLauncher class.
@@ -12,6 +14,8 @@ public class ShopLauncher {
      * @param args the arguments
      */
     public static void main(String[] args) {
-        //TODO: implement using Spring Framework ApplicationContext
+        try (ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring-context.xml")) {
+        	System.out.println(ctx.getDisplayName());
+        }
     }
 }
