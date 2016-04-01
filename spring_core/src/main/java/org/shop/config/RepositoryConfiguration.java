@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-public class RepositoryCongiguration {
+public class RepositoryConfiguration {
 	/**
 	 * {@link ItemRepository}
 	 * @return {@link ItemRepository} object
