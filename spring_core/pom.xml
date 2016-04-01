@@ -8,8 +8,8 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>3.2.15.RELEASE</spring.version>
-		<java.version>1.8</java.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
+		<java.version>1.7</java.version>
 		<commons.collections.version>2.1.1</commons.collections.version>
 		<commons.beanutils.version>1.8.0</commons.beanutils.version>
 	</properties>
@@ -28,12 +28,7 @@
 	  	<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${spring.ver}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.ver}</version>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 	
