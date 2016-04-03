@@ -9,9 +9,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.5.RELEASE</spring.version>
-		<java.version>1.7</java.version>
-		<commons.collections.version>2.1.1</commons.collections.version>
-		<commons.beanutils.version>1.8.0</commons.beanutils.version>
+		<java.version>1.8</java.version>
+		<commons.collections.version>3.2.2</commons.collections.version>
 	</properties>
 	
 	<dependencies>
@@ -19,12 +18,7 @@
 	  		<groupId>commons-collections</groupId>
 	  		<artifactId>commons-collections</artifactId>
 	  		<version>${commons.collections.version}</version>
-	  	</dependency>
-	  	<dependency>
-	  		<groupId>commons-beanutils</groupId>
-	  		<artifactId>commons-beanutils</artifactId>
-	  		<version>${commons.beanutils.version}</version>
-	  	</dependency>	  	
+	  	</dependency>  	
 	  	<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
