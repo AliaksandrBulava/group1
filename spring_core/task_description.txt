@@ -1,8 +1,8 @@
 Spring Core Default Task 01
 	Создать конфигурационные файлы:
-	 	Для repositorу классов
-	 	Для service классов
-	 	Для data initializers классов
+	 	Для repositorу классов - org.shop.config.RepositoriesConfig
+	 	Для service классов - org.shop.config.ServicesConfig
+	 	Для data initializers классов - org.shop.config.InitializersConfig
  
 Spring Core Default Task 02
 	Создать корневой (основной) конфигурационный файл, подключить файлы из п1.
