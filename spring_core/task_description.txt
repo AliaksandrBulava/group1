@@ -5,7 +5,7 @@ Spring Core Default Task 01
 	 	Для data initializers классов - org.shop.config.InitializersConfig
  
 Spring Core Default Task 02
-	Создать корневой (основной) конфигурационный файл, подключить файлы из п1.
+	Создать корневой (основной) конфигурационный файл, подключить файлы из п1. - org.shop.config.RootConfig
  
 Spring Core Default Task 03
 	Реализовать bean definitions для repository классов.
