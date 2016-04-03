@@ -6,6 +6,8 @@ import java.util.List;
 import org.shop.data.User;
 import org.shop.repository.UserRepository;
 import org.shop.repository.map.AbstractMapRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Repository;
 
 /**
  * A factory for creating UserRepository objects.
@@ -15,6 +17,7 @@ import org.shop.repository.map.AbstractMapRepository;
  * @see UserRepository
  * @see User
  */
+@Repository
 public final class UserRepositoryFactory {
     
     /**
@@ -22,6 +25,7 @@ public final class UserRepositoryFactory {
      *
      * @return the user repository
      */
+	@Bean(name="userRepository")
     public UserRepository createUserRepository() {
         return new UserMapRepository();
     }
