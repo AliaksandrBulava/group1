@@ -25,6 +25,8 @@ public class ShopLauncher {
 			System.out.println(bean);
 			bean = ctx.getBean("productRepository");
 			System.out.println(bean);
+			bean = ctx.getBean("proposalRepository");
+			System.out.println(bean);
 		}
 	}
 }
