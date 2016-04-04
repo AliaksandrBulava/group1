@@ -2,15 +2,22 @@ package org.shop.repository.map;
 
 import java.util.List;
 
+
 import org.apache.commons.collections.Predicate;
 import org.shop.data.Order;
 import org.shop.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Repository;
 
 /**
  * The Class OrderMapRepository.
  * 
  * @author Dzmitry_Naskou
  */
+@Repository("orderRepository")
+@PropertySource("classpath:order.properties")
 public class OrderMapRepository extends AbstractMapRepository<Order> implements OrderRepository {
 
     /**
@@ -18,7 +25,8 @@ public class OrderMapRepository extends AbstractMapRepository<Order> implements 
      *
      * @param initialSequence the initial sequence
      */
-    public OrderMapRepository(long initialSequence) {
+	@Autowired
+    public OrderMapRepository(@Value("${initialSequence}") long initialSequence) {
         super(initialSequence);
     }
 
