@@ -7,10 +7,15 @@ import java.util.Map;
 
 import org.shop.api.SellerService;
 import org.shop.data.Seller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * The Seller Initializer util class.
  */
+@Component("sellerInitializer")
 public class SellerInitializer {
 
     /** The seller service. */
@@ -24,11 +29,14 @@ public class SellerInitializer {
      *
      * @param sellerService the seller service
      */
-    public SellerInitializer(Map<Long, String> sellerNames) {
+    @Autowired(required=false)
+    public SellerInitializer(@Value("#{sellers}") Map<Long, String> sellerNames) {
         super();
         this.sellerNames = sellerNames;
     }
     
+    @Autowired
+	@Qualifier("sellerService")
     public void setSellerService(SellerService sellerService) {
         this.sellerService = sellerService;
     }

@@ -1,5 +1,7 @@
 package org.shop;
 
+import javax.annotation.Resource;
+
 import org.shop.api.ProductService;
 
 import org.shop.api.ProposalService;
@@ -7,18 +9,23 @@ import org.shop.api.SellerService;
 import org.shop.common.Products;
 import org.shop.data.Product;
 import org.shop.data.Seller;
+import org.springframework.stereotype.Component;
 /**
  * The Proposal Initializer util class.
  */
+@Component("proposalInitializer")
 public class ProposalInitializer {
     
     /** The product service. */
+	@Resource
     private ProductService productService;
     
     /** The proposal service. */
+	@Resource
     private ProposalService proposalService;
     
     /** The seller service. */
+	@Resource
     private SellerService sellerService;
     
     /**

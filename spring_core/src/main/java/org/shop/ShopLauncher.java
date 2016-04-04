@@ -42,6 +42,15 @@ public class ShopLauncher {
 			System.out.println(bean);
 			bean = ctx.getBean("proposalService");
 			System.out.println(bean);
+			
+			bean = ctx.getBean("sellerInitializer");
+			System.out.println(bean);
+			bean = ctx.getBean("proposalInitializer");
+			System.out.println(bean);
+			bean = ctx.getBean("productInitializer");
+			System.out.println(bean);
+			bean = ctx.getBean("dataInitializer");
+			System.out.println(bean);
 		}
 	}
 }

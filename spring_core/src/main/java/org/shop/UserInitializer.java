@@ -2,10 +2,14 @@ package org.shop;
 
 import org.shop.api.UserService;
 import org.shop.data.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 /**
  * The User Initializer util class.
  */
+@Component("userInitializer")
 public class UserInitializer {
 
     /** The user service. */
@@ -16,7 +20,8 @@ public class UserInitializer {
      *
      * @param userService the user service
      */
-    public UserInitializer(UserService userService) {
+    @Autowired
+    public UserInitializer(@Qualifier("userService") UserService userService) {
         super();
         this.userService = userService;
     }
