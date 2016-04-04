@@ -5,7 +5,11 @@ import java.util.List;
 import org.shop.api.ItemService;
 import org.shop.data.Item;
 import org.shop.repository.ItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+@Service("itemService")
 public class ItemServiceImpl implements ItemService {
     
     /** The item repository. */
@@ -16,7 +20,8 @@ public class ItemServiceImpl implements ItemService {
      *
      * @param repository the item repository
      */
-    public ItemServiceImpl(ItemRepository repository) {
+    @Autowired
+    public ItemServiceImpl(@Qualifier("itemRepository") ItemRepository repository) {
         super();
         this.repository = repository;
     }

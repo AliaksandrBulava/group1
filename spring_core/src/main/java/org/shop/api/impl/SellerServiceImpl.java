@@ -5,11 +5,15 @@ import java.util.List;
 import org.shop.api.SellerService;
 import org.shop.data.Seller;
 import org.shop.repository.SellerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("sellerService")
 public class SellerServiceImpl implements SellerService {
     
     private SellerRepository repository;
 
+    @Autowired
     public void setRepository(SellerRepository repository) {
         this.repository = repository;
     }
