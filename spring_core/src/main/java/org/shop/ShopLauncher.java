@@ -51,6 +51,12 @@ public class ShopLauncher {
 			System.out.println(bean);
 			bean = ctx.getBean("dataInitializer");
 			System.out.println(bean);
+			
+			bean = ctx.getBean("u_serv");
+			System.out.println(bean);
+			
+			
+			
 		}
 	}
 }
