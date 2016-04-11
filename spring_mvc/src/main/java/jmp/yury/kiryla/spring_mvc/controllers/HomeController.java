@@ -22,6 +22,9 @@ public class HomeController {
 	 */
 	@RequestMapping
 	public String home() {
-		return "home";
+		//Exception test
+		throw new IllegalArgumentException("TEST ERROR");
+		
+//		return "home";
 	}
 }
