@@ -102,7 +102,8 @@
 			<input type="submit">
 		</form>
 		<h3>Delete Employee</h3>
-		<form action="${employeeUrl }" method="delete">
+		<form action="${employeeUrl }" method="post">
+			<input type="hidden" name="_method" value="delete" />
 			<input type="submit">
 		</form>
 	</c:if>

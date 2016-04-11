@@ -12,7 +12,17 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven/>
+	<annotation-driven>
+		<message-converters>
+			<beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+			<beans:bean class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter"/>
+		</message-converters>
+	</annotation-driven>
+	
+	<beans:bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+        <beans:property name="maxUploadSize" value="100000000" /> 
+    </beans:bean>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -28,5 +38,29 @@
     </beans:bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	<context:component-scan base-package="jmp.yury.kiryla" />	
+	<context:component-scan base-package="jmp.yury.kiryla" />
+	
+	<beans:bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<beans:property name="order" value="1"/>
+		<beans:property name="contentNegotiationManager">
+			<beans:bean class="org.springframework.web.accept.ContentNegotiationManager">
+				<beans:constructor-arg>
+					<beans:bean class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
+						<beans:constructor-arg>
+							<beans:map>
+								<beans:entry key="json" value="application/json"/>
+								<beans:entry key="xml" value="application/xml"/>
+							</beans:map>
+						</beans:constructor-arg>
+					</beans:bean>
+				</beans:constructor-arg>
+			</beans:bean>
+		</beans:property>
+		<beans:property name="defaultViews">
+			<beans:list>
+				<beans:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+				<beans:bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView"/>
+			</beans:list>
+		</beans:property>
+	</beans:bean>	
 </beans:beans>

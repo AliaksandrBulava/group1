@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jmp.yury.kiryla.jpa_task1.beans.Address;
 import jmp.yury.kiryla.jpa_task1.beans.Employee;
@@ -41,7 +42,7 @@ public class EmployeeController {
 	 * 
 	 * @return employee view
 	 */
-	@RequestMapping
+	@RequestMapping("/")
 	public String epmloyeePage() {
 		return "employee";
 	}
@@ -97,22 +98,6 @@ public class EmployeeController {
 	}
 	
 	/**
-	 * Find employee wit alternate header
-	 * 
-	 * @param id
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.GET, params = "id", headers={"Alternates=other"})
-	public String altFind(Long id, Model model) {
-		Employee employee = employeeService.find(id);
-		if (employee != null) {
-			model.addAttribute(employee);
-		}
-		return "altEmployee";
-	}
-	
-	/**
 	 * Update employee
 	 * @param firstName
 	 * @param lastName
@@ -160,5 +145,55 @@ public class EmployeeController {
 		employeeService.delete(employee.getId());
 		session.invalidate();
 		return "employee";
+	}
+	
+	/**
+	 * Find employee wit alternate header
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, params = "id", headers={"Alternates=other"})
+	public String altFind(Long id, Model model) {
+		Employee employee = employeeService.find(id);
+		if (employee != null) {
+			model.addAttribute(employee);
+		}
+		return "altEmployee";
+	}
+	
+	/**
+	 * Find employee 
+	 * 
+	 * XML Response
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, headers="Accept=application/xml")
+	@ResponseBody
+	public Employee xmlFind(Long id) {
+		Employee employee = employeeService.find(id);
+		
+		return employee;
+	}
+	
+	/**
+	 * Find employee
+	 * 
+	 * JSON Response
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, headers="Accept=application/json")
+	@ResponseBody
+	public Employee jsonFind(Long id) {
+		Employee employee = employeeService.find(id);
+		
+		return employee;
 	}
 }
