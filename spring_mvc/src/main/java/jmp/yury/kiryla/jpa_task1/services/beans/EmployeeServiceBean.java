@@ -4,10 +4,10 @@
 package jmp.yury.kiryla.jpa_task1.services.beans;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import jmp.yury.kiryla.jpa_task1.beans.Address;
 import jmp.yury.kiryla.jpa_task1.beans.Employee;
@@ -34,6 +34,7 @@ public class EmployeeServiceBean implements EmployeeService {
 	 *      jmp.yury.kiryla.jpa_task1.beans.Address)
 	 */
 	@Override
+	@Transactional
 	public Employee create(EmployeePersonalInfo personalInfo, Address address) {
 		if (personalInfo != null && address != null) {
 			Employee employee = new Employee();
@@ -41,11 +42,7 @@ public class EmployeeServiceBean implements EmployeeService {
 			employee.setPersonalInfo(personalInfo);
 			employee.setStatus(EmployeeStatus.NEW);
 
-			EntityTransaction tx = em.getTransaction();
-
-			tx.begin();
 			em.persist(employee);
-			tx.commit();
 
 			return employee;
 		}
@@ -64,13 +61,11 @@ public class EmployeeServiceBean implements EmployeeService {
 	 * @see jmp.yury.kiryla.jpa_task1.services.EmployeeService#delete(long)
 	 */
 	@Override
+	@Transactional
 	public Employee delete(long id) {
 		Employee employee = find(id);
 		if (employee != null) {
-			EntityTransaction tx = em.getTransaction();
-			tx.begin();
 			em.remove(employee);
-			tx.commit();
 		}
 		return employee;
 	}
@@ -79,12 +74,10 @@ public class EmployeeServiceBean implements EmployeeService {
 	 * @see jmp.yury.kiryla.jpa_task1.services.EmployeeService#update(jmp.yury.kiryla.jpa_task1.beans.Employee)
 	 */
 	@Override
+	@Transactional
 	public void update(Employee employee) {
 		if (employee != null) {
-			EntityTransaction tx = em.getTransaction();
-			tx.begin();
 			em.merge(employee);
-			tx.commit();
 		}
 	}
 }
