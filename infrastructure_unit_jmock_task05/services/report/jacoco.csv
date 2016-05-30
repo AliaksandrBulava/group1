@@ -1,5 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-services,jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.beans,AuditoriumServiceBean,40,0,6,0,11,0,7,0,4,0
-services,jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.beans,UserServiceBean,0,50,4,8,0,15,4,6,0,4
-services,jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.beans,EventServiceBean,118,0,30,0,29,0,22,0,7,0
-services,jmp.yury.kiryla.infrastructure_unit_jmock_task05.services.beans,BookingServiceBean,37,0,6,0,13,0,6,0,3,0
